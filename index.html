@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>e-Kehadiran SMK Kampung Baru Kerteh</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="app-header">
+
+    <h1>
+        📚 e-Kehadiran
+    </h1>
+
+    <p>
+        SMK KAMPUNG BARU KERTEH
+    </p>
+
+    <span id="tarikhHariIni"></span>
+
+</div>
+
+
+
+<div class="container">
+
+
+
+<div class="result">
+
+
+<div class="form-card">
+
+
+
+<div class="field">
+
+<label>🏫 Pilih Kelas</label>
+
+
+<select id="kelas" onchange="tukarKelas()">
+
+
+<option value="" selected disabled>
+Sila pilih kelas
+</option>
+
+
+<option value="PRA LILY">
+PRA LILY
+</option>
+
+
+<option value="2 KVS MASAKAN">
+2 KVS MASAKAN
+</option>
+
+
+<option value="2 KVS PASTRI">
+2 KVS PASTRI
+</option>
+
+
+
+<option value="1 MAWAR">
+1 MAWAR
+</option>
+
+
+<option value="1 MELATI">
+1 MELATI
+</option>
+
+
+<option value="1 MELOR">
+1 MELOR
+</option>
+
+
+
+
+<option value="2 MAWAR">
+2 MAWAR
+</option>
+
+
+<option value="2 MELATI">
+2 MELATI
+</option>
+
+
+<option value="2 MELOR">
+2 MELOR
+</option>
+
+
+
+
+<option value="3 MAWAR">
+3 MAWAR
+</option>
+
+
+<option value="3 MELATI">
+3 MELATI
+</option>
+
+
+<option value="3 MELOR">
+3 MELOR
+</option>
+
+
+
+
+<option value="4 BAKAWALI">
+4 BAKAWALI
+</option>
+
+
+<option value="4 CEMPAKA">
+4 CEMPAKA
+</option>
+
+
+<option value="4 KENANGA">
+4 KENANGA
+</option>
+
+
+<option value="4 SEROJA">
+4 SEROJA
+</option>
+
+
+
+
+<option value="5 BAKAWALI">
+5 BAKAWALI
+</option>
+
+
+<option value="5 CEMPAKA">
+5 CEMPAKA
+</option>
+
+
+<option value="5 KENANGA">
+5 KENANGA
+</option>
+
+
+<option value="5 SEROJA">
+5 SEROJA
+</option>
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+<div class="murid-card">
+
+
+👥 Jumlah Murid
+
+
+<h2 id="jumlahLabel">
+- Orang
+</h2>
+
+
+
+<input
+id="jumlah"
+value=""
+readonly
+hidden>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="field">
+
+
+<label>
+✍️ Masukkan Kehadiran Hari Ini
+</label>
+
+
+
+<input
+
+type="number"
+
+id="hadir"
+
+placeholder="Masukkan jumlah hadir"
+
+min="0"
+
+oninput="kira()"
+
+>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="summary">
+
+
+<div class="summary-card">
+
+
+<small>
+👥 Hadir
+</small>
+
+
+<h2 id="hadirView">
+0
+</h2>
+
+
+</div>
+
+
+
+
+
+<div class="summary-card">
+
+
+<small>
+❌ Tidak Hadir
+</small>
+
+
+<h2 id="takHadir">
+0
+</h2>
+
+
+</div>
+
+
+
+
+
+<div class="summary-card">
+
+
+<small>
+📈 Kehadiran
+</small>
+
+
+<h2>
+
+<span id="peratus">
+0
+</span>
+
+%
+
+</h2>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<button id="btnSimpan" onclick="simpan()">
+
+
+💾 SIMPAN KEHADIRAN
+
+
+</button>
+
+
+
+<p id="status"></p>
+
+
+
+
+</div>
+
+
+
+
+
+
+<hr>
+
+
+
+
+
+<h2 style="text-align:center">
+
+REKOD KEHADIRAN HARI INI
+
+</h2>
+
+
+
+
+
+<div class="table-container">
+
+
+<table id="rekod">
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<script src="js/script.js"></script>
+
+
+
+</body>
+
+</html>

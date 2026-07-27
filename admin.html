@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Dashboard e-Kehadiran
+</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="css/admin.css">
+
+
+</head>
+
+
+<body>
+
+
+<h1>
+📊 Dashboard e-Kehadiran
+</h1>
+
+
+<h3>
+SMK KAMPUNG BARU KERTEH
+</h3>
+
+
+<div class="card" style="margin-top:20px">
+
+
+<h2>
+⚠️ Belum Isi Hari Ini
+</h2>
+
+
+<div id="belumSenarai">
+
+Tiada
+
+
+</div>
+
+
+</div>
+
+<hr>
+
+
+<div class="dashboard">
+
+
+<div class="card">
+
+<h1 id="jumlahKelas">
+0
+</h1>
+
+<p>
+Jumlah Kelas
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h1 id="sudahIsi">
+0
+</h1>
+
+<p>
+Sudah Isi
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h1 id="belumIsi">
+0
+</h1>
+
+<p>
+Belum Isi
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h1 id="purata">
+0%
+</h1>
+
+<p>
+Purata Kehadiran
+</p>
+
+</div>
+
+
+</div>
+
+
+<hr>
+
+
+<h2>
+Kehadiran Sekolah
+</h2>
+
+
+<p>
+Jumlah Murid:
+<b id="jumlahMurid">0</b>
+</p>
+
+
+<p>
+Hadir:
+<b id="jumlahHadir">0</b>
+</p>
+
+
+<p>
+Tidak Hadir:
+<b id="jumlahTidak">0</b>
+</p>
+
+
+<p>
+Purata:
+<b id="purata">0%</b>
+</p>
+
+
+
+<hr>
+
+
+<h2>
+Status Kelas
+</h2>
+
+
+<div id="senaraiKelas">
+
+</div>
+
+
+<tr>
+
+<th>
+Kelas
+</th>
+
+
+<th>
+Status
+</th>
+
+
+<th>
+Kehadiran
+</th>
+
+</tr>
+
+
+<tbody id="senaraiKelas">
+
+
+</tbody>
+
+
+</table>
+
+
+
+<script src="js/admin.js"></script>
+
+<button onclick="downloadLaporan()">
+
+📥 Download Laporan Hari Ini
+
+</button>
+
+</button>
+
+</body>
+
+</html>
