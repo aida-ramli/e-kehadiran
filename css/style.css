@@ -1,0 +1,916 @@
+/* =========================
+   RESET
+========================= */
+
+*{
+    box-sizing:border-box;
+    font-family:
+    "Inter",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+
+body{
+
+    margin:0;
+
+    background:#f5f7fb;
+
+    color:#1e293b;
+	overflow-x:hidden;
+}
+
+
+
+/* =========================
+   HEADER
+========================= */
+
+.app-header{
+
+    background:
+    linear-gradient(
+        135deg,
+        #0f172a,
+        #1e40af
+    );
+
+    color:white;
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    border-radius:0 0 30px 30px;
+
+}
+
+
+.app-header h1{
+
+    margin:0;
+
+    font-size:32px;
+
+    font-weight:700;
+
+}
+
+
+.app-header p{
+
+    margin:8px 0;
+
+    opacity:.85;
+
+    font-size:15px;
+
+}
+
+
+#tarikhHariIni{
+
+    display:inline-block;
+
+    margin-top:12px;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,0.15);
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:white;
+
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+
+.container{
+
+    width:100%;
+
+    max-width:600px;
+
+    margin:auto;
+
+    padding:20px;
+
+}
+
+
+
+/* =========================
+   FORM CARD
+========================= */
+
+
+.form-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 10px 30px rgba(15,23,42,.08);
+
+}
+
+
+
+/* =========================
+   INPUT FIELD
+========================= */
+
+
+.field{
+
+    margin-bottom:20px;
+
+}
+
+
+.field label{
+
+    display:block;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+    color:#334155;
+
+}
+
+
+
+select,
+input{
+
+
+    width:100%;
+
+    height:50px;
+
+    border-radius:14px;
+
+    border:1px solid #dbe3ef;
+
+    padding:0 15px;
+
+    font-size:16px;
+
+    background:#f8fafc;
+
+}
+
+
+
+select:focus,
+input:focus{
+
+    outline:none;
+
+    border-color:#2563eb;
+
+    background:white;
+
+}
+
+
+
+/* =========================
+   JUMLAH MURID CARD
+========================= */
+
+
+.murid-card{
+
+    background:#eff6ff;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    text-align:center;
+
+    color:#1d4ed8;
+
+    margin-bottom:20px;
+
+}
+
+
+.murid-card h2{
+
+    margin:8px 0 0;
+
+    font-size:28px;
+
+}
+
+
+
+/* =========================
+   SUMMARY CARD
+========================= */
+
+
+.summary{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:12px;
+
+    margin:25px 0;
+
+}
+
+
+
+.summary-card{
+
+    background:white;
+
+    padding:15px 8px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.06);
+
+}
+
+
+
+.summary-card small{
+
+    color:#64748b;
+
+    font-size:12px;
+
+}
+
+
+
+.summary-card h2{
+
+    margin:8px 0 0;
+
+    font-size:25px;
+
+    color:#0f172a;
+
+}
+
+
+
+/* =========================
+   BUTTON
+========================= */
+
+
+button{
+
+
+    width:100%;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+
+    transition:.2s;
+
+}
+
+
+
+button:hover{
+
+    transform:translateY(-2px);
+
+    background:#1d4ed8;
+
+}
+
+
+
+button:disabled{
+
+    opacity:.6;
+
+}
+
+
+
+/* =========================
+   STATUS
+========================= */
+
+
+#status{
+
+    margin-top:15px;
+
+}
+
+
+
+/* =========================
+   TABLE
+========================= */
+
+
+#rekod{
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+}
+
+
+
+#rekod th{
+
+    background:#0f172a;
+
+    color:white;
+
+    padding:12px;
+
+}
+
+
+#rekod td{
+
+    padding:12px;
+
+    text-align:center;
+
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:500px){
+
+
+.app-header h1{
+
+    font-size:26px;
+
+}
+
+
+.container{
+
+    padding:15px;
+
+}
+
+
+.form-card{
+
+    padding:20px;
+
+}
+
+
+.summary{
+
+    gap:8px;
+
+}
+
+
+.summary-card h2{
+
+    font-size:22px;
+
+}
+
+
+}
+
+#rekod{
+
+    width:100%;
+
+    margin-top:20px;
+
+    border-collapse:separate;
+
+    border-spacing:0;
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.06);
+
+}
+
+
+#rekod th{
+
+    background:#0f172a;
+
+    color:white;
+
+    padding:15px;
+
+    font-size:14px;
+
+}
+
+
+#rekod td{
+
+    padding:15px;
+
+    border-bottom:1px solid #e2e8f0;
+
+    text-align:center;
+
+}
+
+
+#rekod tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+
+#rekod button{
+
+    width:auto;
+
+    height:38px;
+
+    padding:0 20px;
+
+    font-size:14px;
+
+    border-radius:12px;
+
+}
+
+#hadir{
+
+    height:80px;
+
+    font-size:36px;
+
+    font-weight:700;
+
+    text-align:center;
+
+    color:#0f172a;
+
+    background:white;
+
+    border:2px solid #dbeafe;
+
+}
+
+
+#hadir::placeholder{
+
+    font-size:16px;
+
+    font-weight:400;
+
+}
+
+.murid-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        #eff6ff,
+        #dbeafe
+    );
+
+    border-left:
+    5px solid #2563eb;
+
+}
+
+.summary-card:nth-child(1){
+
+    border-top:5px solid #22c55e;
+
+}
+
+
+.summary-card:nth-child(2){
+
+    border-top:5px solid #ef4444;
+
+}
+
+
+.summary-card:nth-child(3){
+
+    border-top:5px solid #2563eb;
+
+}
+
+#btnSimpan{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    box-shadow:
+    0 10px 20px rgba(37,99,235,.25);
+
+}
+.success-card{
+
+background:#f0fdf4;
+
+border-radius:20px;
+
+padding:25px;
+
+margin-top:20px;
+
+text-align:center;
+
+border:
+1px solid #bbf7d0;
+
+animation:
+slideUp .3s ease;
+
+}
+
+
+.success-icon{
+
+width:55px;
+
+height:55px;
+
+margin:auto;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:50%;
+
+background:#22c55e;
+
+color:white;
+
+font-size:30px;
+
+font-weight:bold;
+
+}
+
+
+.success-card h3{
+
+margin:15px 0 10px;
+
+color:#166534;
+
+}
+
+
+.success-card p{
+
+margin:6px;
+
+color:#334155;
+
+}
+
+
+
+@keyframes slideUp{
+
+from{
+
+opacity:0;
+
+transform:
+translateY(15px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+.rekod-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:22px;
+
+    margin-top:15px;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.06);
+
+}
+
+
+
+.rekod-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.rekod-header h3{
+
+    margin:0;
+
+    font-size:18px;
+
+}
+
+
+
+.rekod-header span{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-weight:700;
+
+}
+
+
+
+.rekod-detail{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:10px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.rekod-detail div{
+
+    background:#f8fafc;
+
+    padding:12px 5px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+}
+
+
+
+.rekod-detail small{
+
+    display:block;
+
+    color:#64748b;
+
+    font-size:12px;
+
+}
+
+
+
+.rekod-detail b{
+
+    font-size:22px;
+
+}
+
+
+
+.hadir-text{
+
+    color:#16a34a;
+
+}
+
+
+
+.tidak-text{
+
+    color:#dc2626;
+
+}
+
+
+
+.rekod-card button{
+
+    height:42px;
+
+    font-size:14px;
+
+}
+
+#rekod{
+
+width:100%;
+
+border-collapse:separate;
+
+border-spacing:0 10px;
+
+}
+
+
+
+#rekod th{
+
+background:#1e293b;
+
+color:white;
+
+padding:14px;
+
+font-size:14px;
+
+}
+
+
+
+#rekod td{
+
+background:white;
+
+padding:14px;
+
+text-align:center;
+
+box-shadow:0 5px 15px rgba(0,0,0,.05);
+
+}
+
+
+
+#rekod tr td:first-child{
+
+border-radius:12px 0 0 12px;
+
+}
+
+
+
+#rekod tr td:last-child{
+
+border-radius:0 12px 12px 0;
+
+}
+
+
+
+.hadir-text{
+
+color:#16a34a;
+
+font-weight:bold;
+
+}
+
+
+
+.tidak-text{
+
+color:#dc2626;
+
+font-weight:bold;
+
+}
+
+
+
+.peratus-badge{
+
+background:#dcfce7;
+
+color:#15803d;
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-weight:bold;
+
+font-size:13px;
+
+}
+
+
+
+.edit-btn{
+
+border:none;
+
+background:#eff6ff;
+
+padding:8px 12px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+.table-container{
+
+    width:100%;
+
+    overflow-x:auto;
+
+    -webkit-overflow-scrolling:touch;
+
+}
+
+
+#rekod{
+
+    min-width:700px;
+
+}
