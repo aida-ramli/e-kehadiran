@@ -8,32 +8,32 @@ const SCRIPT_URL =
 const jumlahMurid = {
 
 
-    "PRA LILY":22,
+    "PRA LILY":24,
 
-    "2 KVS MASAKAN":7,
+    "2 KVR MASAKAN":8,
 
-    "2 KVS PASTRI":14,
+    "2 KVS PASTRI":6,
 
 
-    "1 MAWAR":29,
+    "1 MAWAR":30,
     "1 MELATI":28,
-    "1 MELOR":27,
+    "1 MELOR":28,
 
 
     "2 MAWAR":31,
     "2 MELATI":30,
-    "2 MELOR":26,
+    "2 MELOR":27,
 
 
     "3 MAWAR":33,
     "3 MELATI":33,
-    "3 MELOR":31,
+    "3 MELOR":30,
 
 
     "4 BAKAWALI":21,
-    "4 CEMPAKA":27,
-    "4 KENANGA":13,
-    "4 SEROJA":22,
+    "4 CEMPAKA":26,
+    "4 KENANGA":11,
+    "4 SEROJA":21,
 
 
     "5 BAKAWALI":19,
