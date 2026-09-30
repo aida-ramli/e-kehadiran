@@ -15,7 +15,7 @@ const jumlahMurid = {
     "2 KVS PASTRI":6,
 
 
-    "1 MAWAR":30,
+    "1 MAWAR":29,
     "1 MELATI":28,
     "1 MELOR":28,
 
