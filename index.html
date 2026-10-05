@@ -1,657 +1,13 @@
 <!DOCTYPE html>
-
-<html lang="ms">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
+<title>e-Kehadiran SMK Kampung Baru Kerteh</title>
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>
-e-Kehadiran SMK Kg Baru Kerteh
-</title>
-
-
-<style>
-
-* {
-    box-sizing: border-box;
-}
-
-
-body {
-
-    margin: 0;
-
-    font-family:
-    Arial,
-    sans-serif;
-
-    background:
-    linear-gradient(
-        135deg,
-        #eef2ff,
-        #f0fdf4
-    );
-
-    color: #1f2937;
-
-}
-
-
-.container {
-
-    width: min(
-        1200px,
-        94%
-    );
-
-    margin: auto;
-
-    padding: 20px 0 40px;
-
-}
-
-
-.header {
-
-    background:
-    linear-gradient(
-        135deg,
-        #1d4ed8,
-        #7c3aed
-    );
-
-    color: white;
-
-    padding: 25px;
-
-    border-radius: 22px;
-
-    text-align: center;
-
-    box-shadow:
-    0 12px 30px
-    rgba(0,0,0,.15);
-
-}
-
-
-.header h1 {
-
-    margin: 0;
-
-    font-size: 30px;
-
-}
-
-
-.header p {
-
-    margin: 8px 0 0;
-
-}
-
-
-.date-control {
-
-    margin-top: 20px;
-
-}
-
-
-.date-control input {
-
-    max-width: 250px;
-
-}
-
-
-.card {
-
-    background: white;
-
-    border-radius: 20px;
-
-    padding: 22px;
-
-    margin-top: 20px;
-
-    box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.08);
-
-}
-
-
-.card-title {
-
-    font-size: 21px;
-
-    font-weight: bold;
-
-    margin-bottom: 18px;
-
-}
-
-
-.dashboard {
-
-    display: grid;
-
-    grid-template-columns:
-    repeat(5,1fr);
-
-    gap: 14px;
-
-    margin-top: 20px;
-
-}
-
-
-.stat {
-
-    background: #f8fafc;
-
-    border-radius: 16px;
-
-    padding: 18px;
-
-    text-align: center;
-
-    border: 1px solid #e5e7eb;
-
-}
-
-
-.stat-title {
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-    color: #64748b;
-
-}
-
-
-.stat-value {
-
-    font-size: 27px;
-
-    font-weight: 800;
-
-    margin-top: 7px;
-
-}
-
-
-.blue {
-    color: #2563eb;
-}
-
-
-.green {
-    color: #16a34a;
-}
-
-
-.red {
-    color: #dc2626;
-}
-
-
-.purple {
-    color: #7c3aed;
-}
-
-
-.orange {
-    color: #ea580c;
-}
-
-
-.kpi-box {
-
-    margin-top: 18px;
-
-    background: #f8fafc;
-
-    border-radius: 15px;
-
-    padding: 15px;
-
-}
-
-
-.kpi-bar {
-
-    height: 18px;
-
-    background: #e5e7eb;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    margin-top: 10px;
-
-}
-
-
-.kpi-progress {
-
-    height: 100%;
-
-    width: 0%;
-
-    background:
-    linear-gradient(
-        90deg,
-        #22c55e,
-        #16a34a
-    );
-
-    transition: .4s;
-
-}
-
-
-.form-grid {
-
-    display: grid;
-
-    grid-template-columns:
-    1fr 1fr;
-
-    gap: 18px;
-
-}
-
-
-label {
-
-    display: block;
-
-    font-weight: bold;
-
-    margin-bottom: 7px;
-
-}
-
-
-input,
-select {
-
-    width: 100%;
-
-    padding: 13px;
-
-    border-radius: 11px;
-
-    border:
-    2px solid #e5e7eb;
-
-    font-size: 16px;
-
-}
-
-
-input:focus,
-select:focus {
-
-    outline: none;
-
-    border-color: #2563eb;
-
-}
-
-
-.info-grid {
-
-    display: grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-    gap: 14px;
-
-    margin-top: 18px;
-
-}
-
-
-.info {
-
-    background: #f8fafc;
-
-    padding: 16px;
-
-    border-radius: 14px;
-
-    text-align: center;
-
-}
-
-
-.info-label {
-
-    font-size: 13px;
-
-    color: #64748b;
-
-    font-weight: bold;
-
-}
-
-
-.info-value {
-
-    font-size: 25px;
-
-    font-weight: 800;
-
-    margin-top: 6px;
-
-}
-
-
-.save-btn {
-
-    width: 100%;
-
-    margin-top: 20px;
-
-    padding: 15px;
-
-    border: none;
-
-    border-radius: 12px;
-
-    color: white;
-
-    background:
-    linear-gradient(
-        135deg,
-        #2563eb,
-        #7c3aed
-    );
-
-    font-size: 17px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-}
-
-
-.save-btn:disabled {
-
-    opacity: .6;
-
-}
-
-
-.message {
-
-    margin-top: 15px;
-
-}
-
-
-.success {
-
-    background: #ecfdf5;
-
-    border: 1px solid #22c55e;
-
-    color: #166534;
-
-    padding: 15px;
-
-    border-radius: 12px;
-
-}
-
-
-.error {
-
-    background: #fef2f2;
-
-    border: 1px solid #ef4444;
-
-    color: #991b1b;
-
-    padding: 15px;
-
-    border-radius: 12px;
-
-}
-
-
-.tools {
-
-    display: flex;
-
-    gap: 10px;
-
-    margin-bottom: 18px;
-
-}
-
-
-.search {
-
-    flex: 1;
-
-}
-
-
-.export-btn {
-
-    background: #16a34a;
-
-    color: white;
-
-}
-
-
-.refresh-btn {
-
-    background: #2563eb;
-
-    color: white;
-
-}
-
-
-button {
-
-    border: none;
-
-    padding: 12px 16px;
-
-    border-radius: 10px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-}
-
-
-.table-wrapper {
-
-    overflow-x: auto;
-
-}
-
-
-table {
-
-    width: 100%;
-
-    border-collapse: collapse;
-
-    min-width: 750px;
-
-}
-
-
-th {
-
-    background: #1e3a8a;
-
-    color: white;
-
-    padding: 12px;
-
-}
-
-
-td {
-
-    padding: 11px;
-
-    border-bottom:
-    1px solid #e5e7eb;
-
-    text-align: center;
-
-}
-
-
-tr:hover {
-
-    background: #f8fafc;
-
-}
-
-
-.hadir {
-
-    color: #16a34a;
-
-    font-weight: bold;
-
-}
-
-
-.tidak {
-
-    color: #dc2626;
-
-    font-weight: bold;
-
-}
-
-
-.badge {
-
-    display: inline-block;
-
-    padding: 6px 10px;
-
-    border-radius: 20px;
-
-    background: #dbeafe;
-
-    color: #1d4ed8;
-
-    font-weight: bold;
-
-}
-
-
-.edit {
-
-    background: #fef3c7;
-
-    color: #92400e;
-
-}
-
-
-.empty {
-
-    padding: 25px;
-
-    text-align: center;
-
-    color: #64748b;
-
-}
-
-
-.footer {
-
-    text-align: center;
-
-    margin-top: 25px;
-
-    color: #64748b;
-
-    font-size: 13px;
-
-}
-
-
-@media(max-width:900px) {
-
-    .dashboard {
-
-        grid-template-columns:
-        repeat(2,1fr);
-
-    }
-
-}
-
-
-@media(max-width:700px) {
-
-    .form-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .info-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .tools {
-
-        flex-direction: column;
-
-    }
-
-
-    .dashboard {
-
-        grid-template-columns: 1fr 1fr;
-
-    }
-
-
-    .header h1 {
-
-        font-size: 23px;
-
-    }
-
-}
-
-
-</style>
+<link rel="stylesheet" href="css/style.css">
 
 </head>
 
@@ -659,1677 +15,365 @@ tr:hover {
 <body>
 
 
+<div class="app-header">
+
+    <h1>
+        📚 e-Kehadiran
+    </h1>
+
+    <p>
+        SMK KAMPUNG BARU KERTEH
+    </p>
+
+    <span id="tarikhHariIni"></span>
+
+</div>
+
+
+
 <div class="container">
 
 
-<div class="header">
 
-<h1>
-📊 e-Kehadiran
-</h1>
+<div class="result">
 
-<p>
-SMK KG BARU KERTEH
-</p>
 
-<p id="tarikhPaparan">
-</p>
+<div class="form-card">
 
 
-<div class="date-control">
 
-<label>
-Pilih Tarikh
-</label>
+<div class="field">
 
-<input
-type="date"
-id="tarikh"
-onchange="muatData()">
+<label>🏫 Pilih Kelas</label>
 
-</div>
 
-</div>
+<select id="kelas" onchange="tukarKelas()">
 
 
-<!-- DASHBOARD -->
-
-
-<div class="card">
-
-<div class="card-title">
-📊 Dashboard Kehadiran
-</div>
-
-
-<div class="dashboard">
-
-
-<div class="stat">
-
-<div class="stat-title">
-JUMLAH MURID
-</div>
-
-<div
-id="statJumlah"
-class="stat-value blue">
-
-0
-
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-title">
-HADIR
-</div>
-
-<div
-id="statHadir"
-class="stat-value green">
-
-0
-
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-title">
-TIDAK HADIR
-</div>
-
-<div
-id="statTidak"
-class="stat-value red">
-
-0
-
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-title">
-KEHADIRAN
-</div>
-
-<div
-id="statPeratus"
-class="stat-value purple">
-
-0%
-
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-title">
-KELAS DIREKOD
-</div>
-
-<div
-id="statKelas"
-class="stat-value orange">
-
-0/0
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<div class="kpi-box">
-
-<b>
-🎯 KPI Kehadiran Sekolah: 92%
-</b>
-
-<div class="kpi-bar">
-
-<div
-id="kpiProgress"
-class="kpi-progress">
-</div>
-
-</div>
-
-<p id="kpiStatus">
-Belum ada rekod.
-</p>
-
-</div>
-
-
-</div>
-
-
-<!-- BORANG -->
-
-
-<div class="card">
-
-<div class="card-title">
-📝 Masukkan Kehadiran
-</div>
-
-
-<div class="form-grid">
-
-
-<div>
-
-<label>
-Tarikh
-</label>
-
-<input
-type="date"
-id="tarikhInput"
-onchange="syncTarikh()">
-
-</div>
-
-
-<div>
-
-<label>
-Kelas
-</label>
-
-<select
-id="kelas"
-onchange="tukarKelas()">
-
-<option value="">
--- Pilih Kelas --
+<option value="" selected disabled>
+Sila pilih kelas
 </option>
+
+
+<option value="PRA LILY">
+PRA LILY
+</option>
+
+
+<option value="2 KVR MASAKAN">
+2 KVR MASAKAN
+</option>
+
+
+<option value="2 KVS PASTRI">
+2 KVS PASTRI
+</option>
+
+
+
+<option value="1 MAWAR">
+1 MAWAR
+</option>
+
+
+<option value="1 MELATI">
+1 MELATI
+</option>
+
+
+<option value="1 MELOR">
+1 MELOR
+</option>
+
+
+
+
+<option value="2 MAWAR">
+2 MAWAR
+</option>
+
+
+<option value="2 MELATI">
+2 MELATI
+</option>
+
+
+<option value="2 MELOR">
+2 MELOR
+</option>
+
+
+
+
+<option value="3 MAWAR">
+3 MAWAR
+</option>
+
+
+<option value="3 MELATI">
+3 MELATI
+</option>
+
+
+<option value="3 MELOR">
+3 MELOR
+</option>
+
+
+
+
+<option value="4 BAKAWALI">
+4 BAKAWALI
+</option>
+
+
+<option value="4 CEMPAKA">
+4 CEMPAKA
+</option>
+
+
+<option value="4 KENANGA">
+4 KENANGA
+</option>
+
+
+<option value="4 SEROJA">
+4 SEROJA
+</option>
+
+
+
+
+<option value="5 BAKAWALI">
+5 BAKAWALI
+</option>
+
+
+<option value="5 CEMPAKA">
+5 CEMPAKA
+</option>
+
+
+<option value="5 KENANGA">
+5 KENANGA
+</option>
+
+
+<option value="5 SEROJA">
+5 SEROJA
+</option>
+
+
 
 </select>
 
-</div>
-
 
 </div>
 
 
-<div class="info-grid">
 
 
-<div class="info">
 
-<div class="info-label">
-👥 JUMLAH MURID
-</div>
-
-<div
-id="jumlahView"
-class="info-value blue">
-
-0
-
-</div>
-
-</div>
+<div class="murid-card">
 
 
-<div class="info">
-
-<div class="info-label">
-🟢 HADIR
-</div>
-
-<div
-id="hadirView"
-class="info-value green">
-
-0
-
-</div>
-
-</div>
+👥 Jumlah Murid
 
 
-<div class="info">
-
-<div class="info-label">
-🔴 TIDAK HADIR
-</div>
-
-<div
-id="takHadirView"
-class="info-value red">
-
-0
-
-</div>
-
-</div>
+<h2 id="jumlahLabel">
+- Orang
+</h2>
 
 
-</div>
-
-
-<div style="margin-top:18px;">
-
-<label>
-Bilangan Murid Hadir
-</label>
 
 <input
+id="jumlah"
+value=""
+readonly
+hidden>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="field">
+
+
+<label>
+✍️ Masukkan Kehadiran Hari Ini
+</label>
+
+
+
+<input
+
 type="number"
+
 id="hadir"
+
+placeholder="Masukkan jumlah hadir"
+
 min="0"
-placeholder="Masukkan bilangan hadir"
-oninput="kira()">
+
+oninput="kira()"
+
+>
+
+
+
 
 </div>
 
 
-<div class="info" style="margin-top:15px;">
 
-<div class="info-label">
-📈 PERATUS KEHADIRAN
+
+
+
+
+<div class="summary">
+
+
+<div class="summary-card">
+
+
+<small>
+👥 Hadir
+</small>
+
+
+<h2 id="hadirView">
+0
+</h2>
+
+
 </div>
 
-<div
-id="peratusView"
-class="info-value purple">
 
-0%
+
+
+
+<div class="summary-card">
+
+
+<small>
+❌ Tidak Hadir
+</small>
+
+
+<h2 id="takHadir">
+0
+</h2>
+
 
 </div>
 
+
+
+
+
+<div class="summary-card">
+
+
+<small>
+📈 Kehadiran
+</small>
+
+
+<h2>
+
+<span id="peratus">
+0
+</span>
+
+%
+
+</h2>
+
+
 </div>
 
 
-<button
-id="btnSimpan"
-class="save-btn"
-onclick="simpan()">
+
+</div>
+
+
+
+
+
+
+
+<button id="btnSimpan" onclick="simpan()">
+
 
 💾 SIMPAN KEHADIRAN
 
-</button>
-
-
-<div
-id="message"
-class="message">
-</div>
-
-
-</div>
-
-
-<!-- REKOD -->
-
-
-<div class="card">
-
-<div class="card-title">
-📋 Rekod Kehadiran
-</div>
-
-
-<div class="tools">
-
-<input
-class="search"
-type="text"
-id="carian"
-placeholder="🔎 Cari kelas..."
-oninput="tapisJadual()">
-
-
-<button
-class="refresh-btn"
-onclick="muatData()">
-
-🔄 Refresh
 
 </button>
 
 
-<button
-class="export-btn"
-onclick="exportCSV()">
 
-📥 Excel/CSV
+<p id="status"></p>
 
-</button>
+
+
 
 </div>
 
 
-<div class="table-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>
-Kelas
-</th>
-
-<th>
-Murid
-</th>
-
-<th>
-Hadir
-</th>
-
-<th>
-Tidak Hadir
-</th>
-
-<th>
-%
-</th>
-
-<th>
-Tindakan
-</th>
-
-</tr>
-
-</thead>
 
 
-<tbody id="rekod">
 
-<tr>
 
-<td
-colspan="6"
-class="empty">
+<hr>
 
-⏳ Memuatkan data...
 
-</td>
 
-</tr>
 
-</tbody>
+
+<h2 style="text-align:center">
+
+REKOD KEHADIRAN HARI INI
+
+</h2>
+
+
+
+
+
+<div class="table-container">
+
+
+<table id="rekod">
+
 
 </table>
 
-</div>
-
 
 </div>
 
 
-<div class="footer">
 
-e-Kehadiran
-<br>
-SMK Kg Baru Kerteh
-
-</div>
 
 
 </div>
 
 
-<script>
 
+</div>
 
-/************************************************
- * CONFIG
- ************************************************/
 
 
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbzkQyiBV-SQ8ZtdHUmJ6GhrbR2WnzXtxRcXxfIFc3e9CoS1b9Msyd8fE-AyLF_BSCqFJg/exec";
 
 
-const KPI = 92;
 
+<script src="js/script.js"></script>
 
-let senaraiKelas = [];
 
-let semuaRekod = [];
-
-
-/************************************************
- * START
- ************************************************/
-
-
-document.addEventListener(
-    "DOMContentLoaded",
-    async function() {
-
-        const today =
-            formatDateLocal(
-                new Date()
-            );
-
-        document.getElementById(
-            "tarikh"
-        ).value = today;
-
-
-        document.getElementById(
-            "tarikhInput"
-        ).value = today;
-
-
-        paparTarikh();
-
-
-        await muatKelas();
-
-        await muatData();
-
-    }
-);
-
-
-/************************************************
- * TARIKH
- ************************************************/
-
-
-function formatDateLocal(date) {
-
-    const y =
-        date.getFullYear();
-
-
-    const m =
-        String(
-            date.getMonth() + 1
-        ).padStart(2,"0");
-
-
-    const d =
-        String(
-            date.getDate()
-        ).padStart(2,"0");
-
-
-    return `${y}-${m}-${d}`;
-
-}
-
-
-function paparTarikh() {
-
-    const value =
-        document.getElementById(
-            "tarikh"
-        ).value;
-
-
-    if (!value) return;
-
-
-    const date =
-        new Date(
-            value + "T00:00:00"
-        );
-
-
-    document.getElementById(
-        "tarikhPaparan"
-    ).textContent =
-        date.toLocaleDateString(
-            "ms-MY",
-            {
-                weekday:"long",
-                day:"numeric",
-                month:"long",
-                year:"numeric"
-            }
-        );
-
-}
-
-
-function syncTarikh() {
-
-    const value =
-        document.getElementById(
-            "tarikhInput"
-        ).value;
-
-
-    document.getElementById(
-        "tarikh"
-    ).value =
-        value;
-
-
-    paparTarikh();
-
-    muatData();
-
-}
-
-
-/************************************************
- * KELAS
- ************************************************/
-
-
-async function muatKelas() {
-
-    try {
-
-        const response =
-            await fetch(
-                SCRIPT_URL +
-                "?action=kelas&t=" +
-                Date.now()
-            );
-
-
-        const result =
-            await response.json();
-
-
-        if (!Array.isArray(result)) {
-
-            throw new Error(
-                "Senarai kelas tidak sah."
-            );
-
-        }
-
-
-        senaraiKelas =
-            result;
-
-
-        const select =
-            document.getElementById(
-                "kelas"
-            );
-
-
-        select.innerHTML = `
-
-            <option value="">
-                -- Pilih Kelas --
-            </option>
-
-        `;
-
-
-        senaraiKelas.forEach(item => {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                item.kelas;
-
-
-            option.textContent =
-                item.kelas +
-                " (" +
-                item.jumlah +
-                " murid)";
-
-
-            select.appendChild(
-                option
-            );
-
-        });
-
-    }
-
-    catch(error) {
-
-        console.error(error);
-
-        showMessage(
-            "Gagal memuatkan senarai kelas.",
-            true
-        );
-
-    }
-
-}
-
-
-/************************************************
- * TUKAR KELAS
- ************************************************/
-
-
-function tukarKelas() {
-
-    const kelas =
-        document.getElementById(
-            "kelas"
-        ).value;
-
-
-    const item =
-        senaraiKelas.find(
-            x =>
-                x.kelas === kelas
-        );
-
-
-    const jumlah =
-        item
-            ? Number(item.jumlah)
-            : 0;
-
-
-    document.getElementById(
-        "jumlahView"
-    ).textContent =
-        jumlah;
-
-
-    document.getElementById(
-        "hadir"
-    ).value = "";
-
-
-    document.getElementById(
-        "hadir"
-    ).max =
-        jumlah;
-
-
-    document.getElementById(
-        "hadirView"
-    ).textContent =
-        "0";
-
-
-    document.getElementById(
-        "takHadirView"
-    ).textContent =
-        "0";
-
-
-    document.getElementById(
-        "peratusView"
-    ).textContent =
-        "0%";
-
-
-    /*
-     * Jika rekod kelas tersebut sudah ada,
-     * paparkan untuk edit.
-     */
-
-    const existing =
-        semuaRekod.find(
-            x =>
-                x.kelas === kelas
-        );
-
-
-    if (existing) {
-
-        document.getElementById(
-            "hadir"
-        ).value =
-            existing.hadir;
-
-        kira();
-
-    }
-
-}
-
-
-/************************************************
- * KIRA
- ************************************************/
-
-
-function kira() {
-
-    const jumlah =
-        Number(
-            document.getElementById(
-                "jumlahView"
-            ).textContent
-        );
-
-
-    const input =
-        document.getElementById(
-            "hadir"
-        );
-
-
-    const hadir =
-        Number(
-            input.value
-        );
-
-
-    if (!jumlah) {
-
-        return;
-
-    }
-
-
-    if (
-        input.value === ""
-    ) {
-
-        document.getElementById(
-            "hadirView"
-        ).textContent =
-            "0";
-
-
-        document.getElementById(
-            "takHadirView"
-        ).textContent =
-            "0";
-
-
-        document.getElementById(
-            "peratusView"
-        ).textContent =
-            "0%";
-
-
-        return;
-
-    }
-
-
-    if (
-        hadir < 0 ||
-        hadir > jumlah
-    ) {
-
-        input.style.borderColor =
-            "#dc2626";
-
-        document.getElementById(
-            "takHadirView"
-        ).textContent =
-            "—";
-
-
-        document.getElementById(
-            "peratusView"
-        ).textContent =
-            "Tidak sah";
-
-
-        return;
-
-    }
-
-
-    input.style.borderColor =
-        "";
-
-
-    const tidakHadir =
-        jumlah - hadir;
-
-
-    const peratus =
-        (
-            hadir /
-            jumlah *
-            100
-        ).toFixed(2);
-
-
-    document.getElementById(
-        "hadirView"
-    ).textContent =
-        hadir;
-
-
-    document.getElementById(
-        "takHadirView"
-    ).textContent =
-        tidakHadir;
-
-
-    document.getElementById(
-        "peratusView"
-    ).textContent =
-        peratus + "%";
-
-}
-
-
-/************************************************
- * SIMPAN
- ************************************************/
-
-
-async function simpan() {
-
-    const tarikh =
-        document.getElementById(
-            "tarikhInput"
-        ).value;
-
-
-    const kelas =
-        document.getElementById(
-            "kelas"
-        ).value;
-
-
-    const hadirInput =
-        document.getElementById(
-            "hadir"
-        );
-
-
-    const hadir =
-        Number(
-            hadirInput.value
-        );
-
-
-    const item =
-        senaraiKelas.find(
-            x =>
-                x.kelas === kelas
-        );
-
-
-    if (!tarikh) {
-
-        showMessage(
-            "⚠️ Sila pilih tarikh.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    if (!kelas) {
-
-        showMessage(
-            "⚠️ Sila pilih kelas.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    if (
-        hadirInput.value === ""
-    ) {
-
-        showMessage(
-            "⚠️ Sila masukkan bilangan hadir.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    const jumlah =
-        Number(
-            item.jumlah
-        );
-
-
-    if (
-        hadir < 0 ||
-        hadir > jumlah
-    ) {
-
-        showMessage(
-            "⚠️ Bilangan hadir tidak sah.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    const button =
-        document.getElementById(
-            "btnSimpan"
-        );
-
-
-    button.disabled = true;
-
-    button.textContent =
-        "⏳ Menyimpan...";
-
-
-    try {
-
-        const response =
-            await fetch(
-                SCRIPT_URL,
-                {
-
-                    method: "POST",
-
-                    body:
-                        JSON.stringify({
-
-                            action:
-                                "simpan",
-
-                            tarikh:
-                                tarikh,
-
-                            kelas:
-                                kelas,
-
-                            jumlah:
-                                jumlah,
-
-                            hadir:
-                                hadir
-
-                        })
-
-                }
-            );
-
-
-        const result =
-            await response.json();
-
-
-        if (
-            !result.success
-        ) {
-
-            throw new Error(
-                result.error ||
-                "Gagal menyimpan."
-            );
-
-        }
-
-
-        showMessage(
-
-            "✅ " +
-            result.message +
-            "<br><br>" +
-
-            "<b>" +
-            kelas +
-            "</b><br>" +
-
-            "Hadir: " +
-            hadir +
-            "/" +
-            jumlah +
-            "<br>" +
-
-            "Tidak hadir: " +
-            (
-                jumlah - hadir
-            ) +
-            "<br>" +
-
-            "Kehadiran: " +
-            result.peratus +
-            "%"
-
-        );
-
-
-        await muatData();
-
-
-    }
-
-    catch(error) {
-
-        console.error(error);
-
-        showMessage(
-            "❌ Gagal menyimpan: " +
-            error.message,
-            true
-        );
-
-    }
-
-
-    button.disabled = false;
-
-    button.textContent =
-        "💾 SIMPAN KEHADIRAN";
-
-}
-
-
-/************************************************
- * LOAD DATA
- ************************************************/
-
-
-async function muatData() {
-
-    const tarikh =
-        document.getElementById(
-            "tarikh"
-        ).value;
-
-
-    if (!tarikh) {
-
-        return;
-
-    }
-
-
-    paparTarikh();
-
-
-    const tbody =
-        document.getElementById(
-            "rekod"
-        );
-
-
-    tbody.innerHTML = `
-
-        <tr>
-
-            <td
-                colspan="6"
-                class="empty">
-
-                ⏳ Memuatkan data...
-
-            </td>
-
-        </tr>
-
-    `;
-
-
-    try {
-
-        const response =
-            await fetch(
-
-                SCRIPT_URL +
-                "?action=rekod" +
-                "&tarikh=" +
-                encodeURIComponent(
-                    tarikh
-                ) +
-                "&t=" +
-                Date.now()
-
-            );
-
-
-        const result =
-            await response.json();
-
-
-        if (
-            !result.success
-        ) {
-
-            throw new Error(
-                result.error ||
-                "Gagal mendapatkan data."
-            );
-
-        }
-
-
-        semuaRekod =
-            result.records || [];
-
-
-        paparDashboard(
-            result.summary
-        );
-
-
-        paparJadual(
-            semuaRekod
-        );
-
-
-    }
-
-    catch(error) {
-
-        console.error(error);
-
-
-        tbody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="6"
-                    class="empty"
-                    style="color:#dc2626;">
-
-                    ❌ Gagal memuatkan data.
-
-                    <br><br>
-
-                    ${error.message}
-
-                </td>
-
-            </tr>
-
-        `;
-
-    }
-
-}
-
-
-/************************************************
- * DASHBOARD
- ************************************************/
-
-
-function paparDashboard(
-    summary
-) {
-
-    document.getElementById(
-        "statJumlah"
-    ).textContent =
-        summary.jumlah || 0;
-
-
-    document.getElementById(
-        "statHadir"
-    ).textContent =
-        summary.hadir || 0;
-
-
-    document.getElementById(
-        "statTidak"
-    ).textContent =
-        summary.tidakHadir || 0;
-
-
-    document.getElementById(
-        "statPeratus"
-    ).textContent =
-        (summary.peratus || 0)
-        .toFixed(2) +
-        "%";
-
-
-    document.getElementById(
-        "statKelas"
-    ).textContent =
-
-        (summary.kelasDirekod || 0) +
-        "/" +
-        (summary.jumlahKelas || 0);
-
-
-    const progress =
-        Math.min(
-            Number(
-                summary.peratus || 0
-            ),
-            100
-        );
-
-
-    document.getElementById(
-        "kpiProgress"
-    ).style.width =
-        progress + "%";
-
-
-    const status =
-        document.getElementById(
-            "kpiStatus"
-        );
-
-
-    if (
-        summary.kelasDirekod === 0
-    ) {
-
-        status.textContent =
-            "Belum ada rekod untuk tarikh ini.";
-
-        return;
-
-    }
-
-
-    if (
-        summary.peratus >= KPI
-    ) {
-
-        status.innerHTML =
-            "🟢 <b>TAHNIAH!</b> " +
-            "Kehadiran sekolah telah mencapai KPI 92%.";
-
-    }
-
-    else {
-
-        status.innerHTML =
-            "🔴 Kehadiran masih " +
-            "di bawah KPI 92%. " +
-            "Teruskan usaha meningkatkan kehadiran murid.";
-
-    }
-
-}
-
-
-/************************************************
- * PAPAR JADUAL
- ************************************************/
-
-
-function paparJadual(
-    data
-) {
-
-    const tbody =
-        document.getElementById(
-            "rekod"
-        );
-
-
-    tbody.innerHTML = "";
-
-
-    if (
-        data.length === 0
-    ) {
-
-        tbody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="6"
-                    class="empty">
-
-                    📭 Tiada rekod untuk tarikh ini.
-
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    data.forEach(item => {
-
-        const tr =
-            document.createElement(
-                "tr"
-            );
-
-
-        tr.innerHTML = `
-
-            <td>
-                <b>
-                    ${escapeHTML(
-                        item.kelas
-                    )}
-                </b>
-            </td>
-
-            <td>
-                ${item.jumlah}
-            </td>
-
-            <td class="hadir">
-                ${item.hadir}
-            </td>
-
-            <td class="tidak">
-                ${item.tidakHadir}
-            </td>
-
-            <td>
-
-                <span class="badge">
-
-                    ${Number(
-                        item.peratus
-                    ).toFixed(2)}%
-
-                </span>
-
-            </td>
-
-            <td>
-
-                <button
-                    class="edit"
-                    onclick="editRekod(
-                        '${escapeJS(item.kelas)}',
-                        ${item.hadir}
-                    )">
-
-                    ✏️ Edit
-
-                </button>
-
-            </td>
-
-        `;
-
-
-        tbody.appendChild(
-            tr
-        );
-
-    });
-
-}
-
-
-/************************************************
- * EDIT
- ************************************************/
-
-
-function editRekod(
-    kelas,
-    hadir
-) {
-
-    document.getElementById(
-        "kelas"
-    ).value =
-        kelas;
-
-
-    tukarKelas();
-
-
-    document.getElementById(
-        "hadir"
-    ).value =
-        hadir;
-
-
-    kira();
-
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
-}
-
-
-/************************************************
- * CARIAN
- ************************************************/
-
-
-function tapisJadual() {
-
-    const search =
-        document.getElementById(
-            "carian"
-        ).value
-        .toLowerCase();
-
-
-    const rows =
-        document.querySelectorAll(
-            "#rekod tr"
-        );
-
-
-    rows.forEach(row => {
-
-        const text =
-            row.textContent
-            .toLowerCase();
-
-
-        row.style.display =
-            text.includes(search)
-                ? ""
-                : "none";
-
-    });
-
-}
-
-
-/************************************************
- * EXPORT CSV
- ************************************************/
-
-
-function exportCSV() {
-
-    if (
-        semuaRekod.length === 0
-    ) {
-
-        alert(
-            "Tiada data untuk dieksport."
-        );
-
-        return;
-
-    }
-
-
-    const tarikh =
-        document.getElementById(
-            "tarikh"
-        ).value;
-
-
-    let csv =
-        "Tarikh,Kelas,Jumlah Murid,Hadir,Tidak Hadir,Peratus\n";
-
-
-    semuaRekod.forEach(item => {
-
-        csv += [
-
-            tarikh,
-
-            item.kelas,
-
-            item.jumlah,
-
-            item.hadir,
-
-            item.tidakHadir,
-
-            Number(
-                item.peratus
-            ).toFixed(2) + "%"
-
-        ].join(",") + "\n";
-
-    });
-
-
-    const blob =
-        new Blob(
-            [csv],
-            {
-                type:
-                "text/csv;charset=utf-8;"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(
-            blob
-        );
-
-
-    const link =
-        document.createElement(
-            "a"
-        );
-
-
-    link.href = url;
-
-
-    link.download =
-        "Kehadiran_" +
-        tarikh +
-        ".csv";
-
-
-    link.click();
-
-
-    URL.revokeObjectURL(
-        url
-    );
-
-}
-
-
-/************************************************
- * MESSAGE
- ************************************************/
-
-
-function showMessage(
-    message,
-    error = false
-) {
-
-    const element =
-        document.getElementById(
-            "message"
-        );
-
-
-    element.className =
-        error
-            ? "message error"
-            : "message success";
-
-
-    element.innerHTML =
-        message;
-
-}
-
-
-/************************************************
- * SECURITY
- ************************************************/
-
-
-function escapeHTML(
-    value
-) {
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-function escapeJS(
-    value
-) {
-
-    return String(value)
-        .replace(
-            /\\/g,
-            "\\\\"
-        )
-        .replace(
-            /'/g,
-            "\\'"
-        );
-
-}
-
-
-</script>
 
 </body>
 
