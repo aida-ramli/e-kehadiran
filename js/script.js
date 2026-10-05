@@ -25,7 +25,7 @@ const jumlahMurid = {
     "2 MELOR":27,
 
 
-    "3 MAWAR":33,
+    "3 MAWAR":32,
     "3 MELATI":33,
     "3 MELOR":30,
 
