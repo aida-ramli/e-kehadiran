@@ -378,42 +378,32 @@ button.disabled=false;
 
 function loadRekod(){
 
-    console.log("SCRIPT URL:", SCRIPT_URL);
-
     fetch(SCRIPT_URL)
-    .then(res => {
 
-        console.log("STATUS:", res.status);
-        console.log("URL:", res.url);
-        console.log("TYPE:", res.type);
+    .then(res => res.text())
 
-        return res.text();
-
-    })
     .then(text => {
 
         console.log("RESPONSE:", text);
 
-        let table = document.getElementById("rekod");
-
-        table.innerHTML = `
+        document.getElementById("rekod").innerHTML = `
         <tr>
-            <td colspan="6" style="text-align:center;">
-                Response diterima. Sila buka Console.
+            <td colspan="6">
+                <pre style="white-space:pre-wrap;text-align:left;">
+${text}
+                </pre>
             </td>
         </tr>
         `;
 
     })
-    .catch(err => {
 
-        console.error("FETCH ERROR:", err);
+    .catch(err => {
 
         document.getElementById("rekod").innerHTML = `
         <tr>
-            <td colspan="6" style="text-align:center;color:red;">
-                ❌ FETCH ERROR<br>
-                ${err}
+            <td colspan="6">
+                ❌ ${err}
             </td>
         </tr>
         `;
