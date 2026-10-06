@@ -1,5 +1,5 @@
 const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbwJNVjR1p91tRyweeaOkxbf3aS13sUCuHmcvv4fq6puHfkIz-mjlURTvngEuiBLgDnQXQ/exec";
+"https://script.google.com/macros/s/AKfycbyuSP9xr1yOqRF3RNo2NOCY-I2BGdD7zjdGJvHIauXfT8Se_RoRxWIqJjh3X1xRKaws/exec";
 
 
 
