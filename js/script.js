@@ -1,5 +1,5 @@
 const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbyuSP9xr1yOqRF3RNo2NOCY-I2BGdD7zjdGJvHIauXfT8Se_RoRxWIqJjh3X1xRKaws/exec";
+"https://script.google.com/macros/s/AKfycbzkQyiBV-SQ8ZtdHUmJ6GhrbR2WnzXtxRcXxfIFc3e9CoS1b9Msyd8fE-AyLF_BSCqFJg/exec";
 
 
 
@@ -378,39 +378,117 @@ button.disabled=false;
 
 function loadRekod(){
 
-    fetch(SCRIPT_URL)
 
-    .then(res => res.text())
 
-    .then(text => {
+fetch(SCRIPT_URL)
 
-        console.log("RESPONSE:", text);
 
-        document.getElementById("rekod").innerHTML = `
-        <tr>
-            <td colspan="6">
-                <pre style="white-space:pre-wrap;text-align:left;">
-${text}
-                </pre>
-            </td>
-        </tr>
-        `;
 
-    })
+.then(res=>res.json())
 
-    .catch(err => {
 
-        document.getElementById("rekod").innerHTML = `
-        <tr>
-            <td colspan="6">
-                ❌ ${err}
-            </td>
-        </tr>
-        `;
 
-    });
+.then(data=>{
+
+
+
+let table =
+document.getElementById("rekod");
+
+
+
+table.innerHTML=`
+
+<tr>
+
+<th>Kelas</th>
+
+<th>Murid</th>
+
+<th>Hadir</th>
+
+<th>Tidak Hadir</th>
+
+<th>%</th>
+
+<th>Tindakan</th>
+
+</tr>
+
+`;
+
+
+
+
+
+data.forEach(item=>{
+
+
+table.innerHTML +=`
+
+<tr>
+
+
+<td>
+<b>${item.kelas}</b>
+</td>
+
+
+<td>
+${item.jumlah}
+</td>
+
+
+<td class="hadir-text">
+${item.hadir}
+</td>
+
+
+<td class="tidak-text">
+${item.tidakHadir}
+</td>
+
+
+<td>
+
+<span class="peratus-badge">
+
+${item.peratus}%
+
+</span>
+
+</td>
+
+
+<td>
+
+<button
+class="edit-btn"
+onclick="editKelas('${item.kelas}',${item.hadir})">
+
+✏️
+
+</button>
+
+
+</td>
+
+
+</tr>
+
+`;
+
+
+});
+
+
+
+});
+
+
 
 }
+
 
 
 
