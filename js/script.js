@@ -378,113 +378,44 @@ button.disabled=false;
 
 function loadRekod(){
 
-    fetch(SCRIPT_URL)
+    console.log("SCRIPT URL:", SCRIPT_URL);
 
+    fetch(SCRIPT_URL)
     .then(res => {
 
-        if(!res.ok){
-            throw new Error("HTTP Error: " + res.status);
-        }
+        console.log("STATUS:", res.status);
+        console.log("URL:", res.url);
+        console.log("TYPE:", res.type);
 
-        return res.json();
+        return res.text();
 
     })
+    .then(text => {
 
-    .then(data => {
+        console.log("RESPONSE:", text);
 
-        console.log("DATA REKOD:", data);
-
-        let table =
-        document.getElementById("rekod");
+        let table = document.getElementById("rekod");
 
         table.innerHTML = `
-
         <tr>
-
-        <th>Kelas</th>
-
-        <th>Murid</th>
-
-        <th>Hadir</th>
-
-        <th>Tidak Hadir</th>
-
-        <th>%</th>
-
-        <th>Tindakan</th>
-
+            <td colspan="6" style="text-align:center;">
+                Response diterima. Sila buka Console.
+            </td>
         </tr>
-
         `;
 
-
-        data.forEach(item => {
-
-            table.innerHTML += `
-
-            <tr>
-
-            <td>
-            <b>${item.kelas}</b>
-            </td>
-
-            <td>
-            ${item.jumlah}
-            </td>
-
-            <td class="hadir-text">
-            ${item.hadir}
-            </td>
-
-            <td class="tidak-text">
-            ${item.tidakHadir}
-            </td>
-
-            <td>
-
-            <span class="peratus-badge">
-            ${item.peratus}%
-            </span>
-
-            </td>
-
-            <td>
-
-            <button
-            class="edit-btn"
-            onclick="editKelas('${item.kelas}',${item.hadir})">
-
-            ✏️
-
-            </button>
-
-            </td>
-
-            </tr>
-
-            `;
-
-        });
-
     })
-
     .catch(err => {
 
-        console.error("LOAD REKOD ERROR:", err);
+        console.error("FETCH ERROR:", err);
 
         document.getElementById("rekod").innerHTML = `
-
         <tr>
-
-        <td colspan="6"
-        style="text-align:center;color:red;">
-
-        ❌ Gagal membaca rekod kehadiran
-
-        </td>
-
+            <td colspan="6" style="text-align:center;color:red;">
+                ❌ FETCH ERROR<br>
+                ${err}
+            </td>
         </tr>
-
         `;
 
     });
