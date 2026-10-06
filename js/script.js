@@ -378,114 +378,182 @@ button.disabled=false;
 
 function loadRekod(){
 
+    fetch(SCRIPT_URL)
+
+    .then(res => {
+
+        if (!res.ok) {
+            throw new Error("HTTP Error: " + res.status);
+        }
+
+        return res.json();
+
+    })
+
+    .then(data => {
+
+        console.log("DATA DITERIMA:", data);
+
+        // Kalau backend pulangkan error
+        if (!Array.isArray(data)) {
+
+            throw new Error(
+                data.error || "Data rekod tidak sah."
+            );
+
+        }
+
+        let table =
+            document.getElementById("rekod");
+
+        table.innerHTML = `
+            <tr>
+                <th>Kelas</th>
+                <th>Murid</th>
+                <th>Hadir</th>
+                <th>Tidak Hadir</th>
+                <th>%</th>
+                <th>Tindakan</th>
+            </tr>
+        `;
 
 
-fetch(SCRIPT_URL)
+        data.forEach(item => {
+
+            // ==============================
+            // AMBIL NILAI
+            // ==============================
+
+            const kelas =
+                item.kelas || "";
+
+            const hadir =
+                Number(item.hadir) || 0;
+
+            const tidakHadir =
+                Number(item.tidakHadir) || 0;
 
 
+            // ==============================
+            // JUMLAH MURID
+            // ==============================
+            // Kalau item.jumlah ada dan > 0,
+            // guna nilai tersebut.
+            //
+            // Kalau kosong / 0,
+            // kira hadir + tidak hadir.
+            // ==============================
 
-.then(res=>res.json())
+            let jumlah =
+                Number(item.jumlah) || 0;
 
+            if (jumlah <= 0) {
 
+                jumlah =
+                    hadir + tidakHadir;
 
-.then(data=>{
-
-
-
-let table =
-document.getElementById("rekod");
-
-
-
-table.innerHTML=`
-
-<tr>
-
-<th>Kelas</th>
-
-<th>Murid</th>
-
-<th>Hadir</th>
-
-<th>Tidak Hadir</th>
-
-<th>%</th>
-
-<th>Tindakan</th>
-
-</tr>
-
-`;
+            }
 
 
+            // ==============================
+            // PERATUS
+            // ==============================
+
+            let peratus =
+                Number(item.peratus);
+
+            if (!Number.isFinite(peratus)) {
+
+                peratus =
+                    jumlah > 0
+                        ? ((hadir / jumlah) * 100)
+                        : 0;
+
+            }
 
 
-
-data.forEach(item=>{
-
-
-table.innerHTML +=`
-
-<tr>
+            peratus =
+                peratus.toFixed(2);
 
 
-<td>
-<b>${item.kelas}</b>
-</td>
+            // ==============================
+            // PAPAR TABLE
+            // ==============================
 
+            table.innerHTML += `
 
-<td>
-${item.jumlah}
-</td>
+                <tr>
 
+                    <td>
+                        <b>${kelas}</b>
+                    </td>
 
-<td class="hadir-text">
-${item.hadir}
-</td>
+                    <td>
+                        ${jumlah}
+                    </td>
 
+                    <td class="hadir-text">
+                        ${hadir}
+                    </td>
 
-<td class="tidak-text">
-${item.tidakHadir}
-</td>
+                    <td class="tidak-text">
+                        ${tidakHadir}
+                    </td>
 
+                    <td>
+                        <span class="peratus-badge">
+                            ${peratus}%
+                        </span>
+                    </td>
 
-<td>
+                    <td>
 
-<span class="peratus-badge">
+                        <button
+                            class="edit-btn"
+                            onclick="editKelas('${kelas}',${hadir})"
+                        >
+                            ✏️
+                        </button>
 
-${item.peratus}%
+                    </td>
 
-</span>
+                </tr>
 
-</td>
+            `;
 
+        });
 
-<td>
+    })
 
-<button
-class="edit-btn"
-onclick="editKelas('${item.kelas}',${item.hadir})">
+    .catch(err => {
 
-✏️
+        console.error(
+            "Gagal membaca rekod:",
+            err
+        );
 
-</button>
+        document.getElementById("rekod").innerHTML = `
 
+            <tr>
 
-</td>
+                <td
+                    colspan="6"
+                    style="
+                        text-align:center;
+                        color:red;
+                        padding:20px;
+                    "
+                >
 
+                    ❌ Gagal membaca rekod kehadiran
 
-</tr>
+                </td>
 
-`;
+            </tr>
 
+        `;
 
-});
-
-
-
-});
-
-
+    });
 
 }
 
