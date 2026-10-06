@@ -378,117 +378,118 @@ button.disabled=false;
 
 function loadRekod(){
 
+    fetch(SCRIPT_URL)
+
+    .then(res => {
+
+        if(!res.ok){
+            throw new Error("HTTP Error: " + res.status);
+        }
+
+        return res.json();
+
+    })
+
+    .then(data => {
+
+        console.log("DATA REKOD:", data);
+
+        let table =
+        document.getElementById("rekod");
+
+        table.innerHTML = `
+
+        <tr>
+
+        <th>Kelas</th>
+
+        <th>Murid</th>
+
+        <th>Hadir</th>
+
+        <th>Tidak Hadir</th>
+
+        <th>%</th>
+
+        <th>Tindakan</th>
+
+        </tr>
+
+        `;
 
 
-fetch(SCRIPT_URL)
+        data.forEach(item => {
 
+            table.innerHTML += `
 
+            <tr>
 
-.then(res=>res.json())
+            <td>
+            <b>${item.kelas}</b>
+            </td>
 
+            <td>
+            ${item.jumlah}
+            </td>
 
+            <td class="hadir-text">
+            ${item.hadir}
+            </td>
 
-.then(data=>{
+            <td class="tidak-text">
+            ${item.tidakHadir}
+            </td>
 
+            <td>
 
+            <span class="peratus-badge">
+            ${item.peratus}%
+            </span>
 
-let table =
-document.getElementById("rekod");
+            </td>
 
+            <td>
 
+            <button
+            class="edit-btn"
+            onclick="editKelas('${item.kelas}',${item.hadir})">
 
-table.innerHTML=`
+            ✏️
 
-<tr>
+            </button>
 
-<th>Kelas</th>
+            </td>
 
-<th>Murid</th>
+            </tr>
 
-<th>Hadir</th>
+            `;
 
-<th>Tidak Hadir</th>
+        });
 
-<th>%</th>
+    })
 
-<th>Tindakan</th>
+    .catch(err => {
 
-</tr>
+        console.error("LOAD REKOD ERROR:", err);
 
-`;
+        document.getElementById("rekod").innerHTML = `
 
+        <tr>
 
+        <td colspan="6"
+        style="text-align:center;color:red;">
 
+        ❌ Gagal membaca rekod kehadiran
 
+        </td>
 
-data.forEach(item=>{
+        </tr>
 
+        `;
 
-table.innerHTML +=`
-
-<tr>
-
-
-<td>
-<b>${item.kelas}</b>
-</td>
-
-
-<td>
-${item.jumlah}
-</td>
-
-
-<td class="hadir-text">
-${item.hadir}
-</td>
-
-
-<td class="tidak-text">
-${item.tidakHadir}
-</td>
-
-
-<td>
-
-<span class="peratus-badge">
-
-${item.peratus}%
-
-</span>
-
-</td>
-
-
-<td>
-
-<button
-class="edit-btn"
-onclick="editKelas('${item.kelas}',${item.hadir})">
-
-✏️
-
-</button>
-
-
-</td>
-
-
-</tr>
-
-`;
-
-
-});
-
-
-
-});
-
-
+    });
 
 }
-
 
 
 
