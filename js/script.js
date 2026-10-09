@@ -376,117 +376,117 @@ button.disabled=false;
 
 
 
-function loadRekod(){
 
-
-
-fetch(SCRIPT_URL)
-
-
-
-.then(res=>res.json())
-
-
-
-.then(data=>{
-
-
-
-let table =
-document.getElementById("rekod");
-
-
-
-table.innerHTML=`
-
-<tr>
-
-<th>Kelas</th>
-
-<th>Murid</th>
-
-<th>Hadir</th>
-
-<th>Tidak Hadir</th>
-
-<th>%</th>
-
-<th>Tindakan</th>
-
-</tr>
-
-`;
-
-
-
-
-
-data.forEach(item=>{
-
-
-table.innerHTML +=`
-
-<tr>
-
-
-<td>
-<b>${item.kelas}</b>
-</td>
-
-
-<td>
-${item.jumlah}
-</td>
-
-
-<td class="hadir-text">
-${item.hadir}
-</td>
-
-
-<td class="tidak-text">
-${item.tidakHadir}
-</td>
-
-
-<td>
-
-<span class="peratus-badge">
-
-${item.peratus}%
-
-</span>
-
-</td>
-
-
-<td>
-
-<button
-class="edit-btn"
-onclick="editKelas('${item.kelas}',${item.hadir})">
-
-✏️
-
-</button>
-
-
-</td>
-
-
-</tr>
-
-`;
-
-
-});
-
-
-
-});
-
-
-
+function loadRekod() {
+  const table = document.getElementById("rekod");
+
+  table.innerHTML = `
+    <tr>
+      <th>Kelas</th>
+      <th>Murid</th>
+      <th>Hadir</th>
+      <th>Tidak Hadir</th>
+      <th>%</th>
+      <th>Tindakan</th>
+    </tr>
+  `;
+
+  fetch(SCRIPT_URL)
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("Gagal mendapatkan data.");
+      }
+      return res.json();
+    })
+    .then(data => {
+      if (!Array.isArray(data)) {
+        throw new Error(
+          data.error || "Format data daripada Apps Script tidak sah."
+        );
+      }
+
+      // Tarikh hari ini dalam format dd/MM/yyyy.
+      const sekarang = new Date();
+      const hariIni =
+        String(sekarang.getDate()).padStart(2, "0") + "/" +
+        String(sekarang.getMonth() + 1).padStart(2, "0") + "/" +
+        sekarang.getFullYear();
+
+      // Tapis rekod hari ini sahaja.
+      const rekodHariIni = data.filter(item => {
+        let tarikh = item.tarikh ?? item.Tarikh ?? "";
+
+        if (tarikh instanceof Date) {
+          tarikh =
+            String(tarikh.getDate()).padStart(2, "0") + "/" +
+            String(tarikh.getMonth() + 1).padStart(2, "0") + "/" +
+            tarikh.getFullYear();
+        }
+
+        return String(tarikh).trim() === hariIni;
+      });
+
+      if (rekodHariIni.length === 0) {
+        table.innerHTML += `
+          <tr>
+            <td colspan="6" style="text-align:center">
+              Tiada rekod kehadiran untuk hari ini.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      rekodHariIni.forEach(item => {
+        const kelas = item.kelas ?? item.Kelas ?? "";
+        const jumlah = Number(item.jumlah ?? item.Jumlah ?? 0);
+        const hadir = Number(item.hadir ?? item.Hadir ?? 0);
+        const tidakHadir = Number(
+          item.tidakHadir ??
+          item["Tidak Hadir"] ??
+          (jumlah - hadir)
+        );
+        const peratus = Number(
+          String(item.peratus ?? item.Peratus ?? 0).replace("%", "")
+        );
+
+        const tr = document.createElement("tr");
+
+        [
+          kelas,
+          jumlah,
+          hadir,
+          tidakHadir,
+          peratus.toFixed(2) + "%"
+        ].forEach(value => {
+          const td = document.createElement("td");
+          td.textContent = value;
+          tr.appendChild(td);
+        });
+
+        const tindakan = document.createElement("td");
+        const button = document.createElement("button");
+
+        button.className = "edit-btn";
+        button.textContent = "✏️";
+        button.onclick = () => editKelas(kelas, hadir);
+
+        tindakan.appendChild(button);
+        tr.appendChild(tindakan);
+        table.appendChild(tr);
+      });
+    })
+    .catch(err => {
+      console.error("loadRekod:", err);
+
+      table.innerHTML += `
+        <tr>
+          <td colspan="6" style="text-align:center;color:red">
+            Gagal membaca rekod kehadiran.
+          </td>
+        </tr>
+      `;
+    });
 }
 
 
