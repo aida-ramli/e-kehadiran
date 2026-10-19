@@ -1,380 +1,118 @@
+
 <!DOCTYPE html>
-<html>
-
+<html lang="ms">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123c69">
 
-<title>e-Kehadiran SMK Kampung Baru Kerteh</title>
+  <title>e-Kehadiran | SMK Kampung Baru Kerteh</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
-
 <body>
-
-
-<div class="app-header">
-
-    <h1>
-        📚 e-Kehadiran
-    </h1>
-
-    <p>
-        SMK KAMPUNG BARU KERTEH
-    </p>
-
-    <span id="tarikhHariIni"></span>
-
-</div>
-
-
-
-<div class="container">
-
-
-
-<div class="result">
-
-
-<div class="form-card">
-
-
-
-<div class="field">
-
-<label>🏫 Pilih Kelas</label>
-
-
-<select id="kelas" onchange="tukarKelas()">
-
-
-<option value="" selected disabled>
-Sila pilih kelas
-</option>
-
-
-<option value="PRA LILY">
-PRA LILY
-</option>
-
-
-<option value="2 KVR MASAKAN">
-2 KVR MASAKAN
-</option>
-
-
-<option value="2 KVS PASTRI">
-2 KVS PASTRI
-</option>
-
-
-
-<option value="1 MAWAR">
-1 MAWAR
-</option>
-
-
-<option value="1 MELATI">
-1 MELATI
-</option>
-
-
-<option value="1 MELOR">
-1 MELOR
-</option>
-
-
-
-
-<option value="2 MAWAR">
-2 MAWAR
-</option>
-
-
-<option value="2 MELATI">
-2 MELATI
-</option>
-
-
-<option value="2 MELOR">
-2 MELOR
-</option>
-
-
-
-
-<option value="3 MAWAR">
-3 MAWAR
-</option>
-
-
-<option value="3 MELATI">
-3 MELATI
-</option>
-
-
-<option value="3 MELOR">
-3 MELOR
-</option>
-
-
-
-
-<option value="4 BAKAWALI">
-4 BAKAWALI
-</option>
-
-
-<option value="4 CEMPAKA">
-4 CEMPAKA
-</option>
-
-
-<option value="4 KENANGA">
-4 KENANGA
-</option>
-
-
-<option value="4 SEROJA">
-4 SEROJA
-</option>
-
-
-
-
-<option value="5 BAKAWALI">
-5 BAKAWALI
-</option>
-
-
-<option value="5 CEMPAKA">
-5 CEMPAKA
-</option>
-
-
-<option value="5 KENANGA">
-5 KENANGA
-</option>
-
-
-<option value="5 SEROJA">
-5 SEROJA
-</option>
-
-
-
-</select>
-
-
-</div>
-
-
-
-
-
-<div class="murid-card">
-
-
-👥 Jumlah Murid
-
-
-<h2 id="jumlahLabel">
-- Orang
-</h2>
-
-
-
-<input
-id="jumlah"
-value=""
-readonly
-hidden>
-
-
-
-</div>
-
-
-
-
-
-
-<div class="field">
-
-
-<label>
-✍️ Masukkan Kehadiran Hari Ini
-</label>
-
-
-
-<input
-
-type="number"
-
-id="hadir"
-
-placeholder="Masukkan jumlah hadir"
-
-min="0"
-
-oninput="kira()"
-
->
-
-
-
-
-</div>
-
-
-
-
-
-
-
-<div class="summary">
-
-
-<div class="summary-card">
-
-
-<small>
-👥 Hadir
-</small>
-
-
-<h2 id="hadirView">
-0
-</h2>
-
-
-</div>
-
-
-
-
-
-<div class="summary-card">
-
-
-<small>
-❌ Tidak Hadir
-</small>
-
-
-<h2 id="takHadir">
-0
-</h2>
-
-
-</div>
-
-
-
-
-
-<div class="summary-card">
-
-
-<small>
-📈 Kehadiran
-</small>
-
-
-<h2>
-
-<span id="peratus">
-0
-</span>
-
-%
-
-</h2>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-<button id="btnSimpan" onclick="simpan()">
-
-
-💾 SIMPAN KEHADIRAN
-
-
-</button>
-
-
-
-<p id="status"></p>
-
-
-
-
-</div>
-
-
-
-
-
-
-<hr>
-
-
-
-
-
-<h2 style="text-align:center">
-
-REKOD KEHADIRAN HARI INI
-
-</h2>
-
-
-
-
-
-<div class="table-container">
-
-
-<table id="rekod">
-
-
-</table>
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-<script src="js/script.js"></script>
-
-
-
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-icon" aria-hidden="true">📚</div>
+      <div>
+        <h1>e-Kehadiran</h1>
+        <p>SMK Kampung Baru Kerteh</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="welcome-section">
+      <p class="eyebrow">SISTEM KEHADIRAN SEKOLAH</p>
+      <h2>Rekod Kehadiran Kelas</h2>
+      <p>Rekod jumlah kehadiran murid mengikut kelas dan tarikh.</p>
+    </section>
+
+    <section class="attendance-card">
+      <div class="card-heading">
+        <h3>Maklumat Kehadiran</h3>
+        <p>Lengkapkan maklumat di bawah.</p>
+      </div>
+
+      <form id="attendanceForm">
+        <div class="form-group">
+          <label for="tarikh">Tarikh kehadiran</label>
+          <input type="date" id="tarikh" name="tarikh" required>
+        </div>
+
+        <div class="form-group">
+          <label for="kelas">Pilih kelas</label>
+          <select id="kelas" name="kelas" required>
+            <option value="">Sila pilih kelas</option>
+          </select>
+          <small id="classStatus" class="help-text">
+            Memuatkan senarai kelas...
+          </small>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Jumlah murid</span>
+            <strong id="jumlahMurid">—</strong>
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-label">Bilangan hadir</span>
+            <strong id="jumlahHadirPreview">—</strong>
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-label">Tidak hadir</span>
+            <strong id="jumlahTidakHadir">—</strong>
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-label">Kehadiran</span>
+            <strong id="peratusKehadiran">—</strong>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bilanganHadir">Bilangan murid hadir</label>
+          <input
+            type="number"
+            id="bilanganHadir"
+            name="bilanganHadir"
+            min="0"
+            step="1"
+            placeholder="Masukkan bilangan hadir"
+            required
+            disabled
+          >
+          <small class="help-text">
+            Bilangan tidak hadir akan dikira secara automatik.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="catatan">Catatan (pilihan)</label>
+          <textarea
+            id="catatan"
+            name="catatan"
+            rows="3"
+            maxlength="500"
+            placeholder="Masukkan catatan jika perlu"
+          ></textarea>
+        </div>
+
+        <button type="submit" id="saveButton" disabled>
+          Simpan Kehadiran
+        </button>
+
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <footer class="app-footer">
+      <p>e-Kehadiran SMK Kampung Baru Kerteh</p>
+    </footer>
+  </main>
 </body>
-
 </html>
