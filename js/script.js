@@ -197,3 +197,135 @@ form.addEventListener("submit", async (event) => {
 
 setTarikhHariIni();
 muatkanKelas();
+
+const filterTarikh = document.getElementById("filterTarikh");
+const filterKelas = document.getElementById("filterKelas");
+const searchHistoryButton = document.getElementById("searchHistoryButton");
+const resetHistoryButton = document.getElementById("resetHistoryButton");
+const historyMessage = document.getElementById("historyMessage");
+const historyResults = document.getElementById("historyResults");
+
+function paparMesejSejarah(teks, jenis = "") {
+  historyMessage.textContent = teks;
+  historyMessage.className = "message";
+
+  if (jenis) {
+    historyMessage.classList.add(jenis);
+  }
+}
+
+function isiPilihanKelasSejarah() {
+  senaraiKelas.forEach((kelas) => {
+    const option = document.createElement("option");
+    option.value = kelas.id;
+    option.textContent = kelas.nama;
+    filterKelas.appendChild(option);
+  });
+}
+
+async function cariSejarahKehadiran() {
+  searchHistoryButton.disabled = true;
+  resetHistoryButton.disabled = true;
+  paparMesejSejarah("Sedang mendapatkan rekod...");
+  historyResults.replaceChildren();
+
+  try {
+    const parameter = new URLSearchParams({
+      action: "rekod"
+    });
+
+    if (filterTarikh.value) {
+      parameter.set("tarikh", filterTarikh.value);
+    }
+
+    if (filterKelas.value) {
+      parameter.set("idKelas", filterKelas.value);
+    }
+
+    const response = await fetch(`${API_URL}?${parameter.toString()}`);
+
+    if (!response.ok) {
+      throw new Error("Pelayan tidak dapat dihubungi.");
+    }
+
+    const result = await response.json();
+
+    if (result.status !== "berjaya" || !Array.isArray(result.data)) {
+      throw new Error("Format data rekod tidak sah.");
+    }
+
+    paparMesejSejarah(`${result.data.length} rekod dijumpai.`);
+
+    if (result.data.length === 0) {
+      const kosong = document.createElement("p");
+      kosong.textContent = "Tiada rekod untuk pilihan ini.";
+      historyResults.appendChild(kosong);
+      return;
+    }
+
+    result.data.forEach((rekod) => {
+      const card = document.createElement("article");
+      card.className = "history-record";
+
+      const tajuk = document.createElement("h4");
+      tajuk.textContent = rekod.namaKelas;
+
+      const tarikh = document.createElement("p");
+      tarikh.textContent = `Tarikh: ${rekod.tarikh}`;
+
+      const bilangan = document.createElement("p");
+      bilangan.textContent =
+        `Hadir: ${rekod.bilanganHadir} / ${rekod.jumlahMurid}`;
+
+      const tidakHadir = document.createElement("p");
+      tidakHadir.textContent =
+        `Tidak hadir: ${rekod.bilanganTidakHadir}`;
+
+      const peratus = document.createElement("p");
+      peratus.textContent =
+        `Kehadiran: ${Number(rekod.peratusKehadiran).toFixed(2)}%`;
+
+      const id = document.createElement("small");
+      id.textContent = `ID rekod: ${rekod.idRekod}`;
+
+      card.append(tajuk, tarikh, bilangan, tidakHadir, peratus, id);
+
+      if (rekod.catatan) {
+        const catatan = document.createElement("p");
+        catatan.textContent = `Catatan: ${rekod.catatan}`;
+        card.appendChild(catatan);
+      }
+
+      historyResults.appendChild(card);
+    });
+  } catch (error) {
+    paparMesejSejarah(
+      `Gagal memuatkan sejarah: ${error.message}`,
+      "error"
+    );
+  } finally {
+    searchHistoryButton.disabled = false;
+    resetHistoryButton.disabled = false;
+  }
+}
+
+searchHistoryButton.addEventListener("click", cariSejarahKehadiran);
+
+resetHistoryButton.addEventListener("click", () => {
+  filterTarikh.value = "";
+  filterKelas.value = "";
+  cariSejarahKehadiran();
+});
+
+// Isi dropdown sejarah selepas senarai kelas selesai dimuatkan.
+const muatkanKelasAsal = muatkanKelas;
+
+muatkanKelas = async function () {
+  await muatkanKelasAsal();
+
+  if (senaraiKelas.length > 0) {
+    isiPilihanKelasSejarah();
+  }
+};
+
+cariSejarahKehadiran();
