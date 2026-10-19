@@ -315,6 +315,55 @@ input[type="number"] {
     font-size: 16px;
   }
 
+  
+/* FIX KHUSUS INPUT TARIKH PADA TELEFON */
+.attendance-card,
+.attendance-card form,
+.attendance-card .form-group {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.attendance-card input,
+.attendance-card select,
+.attendance-card textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.attendance-card input[type="date"] {
+  display: block;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 10px 6px;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 24px);
+    max-width: 100%;
+  }
+
+  .attendance-card {
+    padding: 16px 10px;
+    overflow: hidden;
+  }
+
+  .attendance-card input[type="date"] {
+    font-size: 16px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+
   input[type="date"] {
     padding: 10px 8px;
   }
