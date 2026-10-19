@@ -3,153 +3,294 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#123c69">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123c35">
+  <meta name="description" content="Sistem pengurusan kehadiran SMK Kampung Baru Kerteh">
   <title>e-Kehadiran | SMK Kampung Baru Kerteh</title>
-
   <link rel="stylesheet" href="css/style.css">
-<script src="js/script.js" defer></script>
+  <script src="js/script.js" defer></script>
 </head>
 
 <body>
   <header class="app-header">
     <div class="header-inner">
-      <div class="brand-icon" aria-hidden="true">📚</div>
+      <div class="brand-mark" aria-hidden="true">EK</div>
       <div>
+        <p class="eyebrow">SISTEM PENGURUSAN SEKOLAH</p>
         <h1>e-Kehadiran</h1>
-        <p>SMK Kampung Baru Kerteh</p>
+        <p class="school-name">SMK Kampung Baru Kerteh</p>
       </div>
     </div>
   </header>
 
-  <main class="container">
+  <main class="page-container">
     <section class="welcome-section">
-      <p class="eyebrow">SISTEM KEHADIRAN SEKOLAH</p>
-      <h2>Rekod Kehadiran Kelas</h2>
-      <p>Rekod jumlah kehadiran murid mengikut kelas dan tarikh.</p>
+      <div>
+        <p class="eyebrow">PANEL PENGURUSAN</p>
+        <h2>Rekod kehadiran kelas</h2>
+        <p>Urus rekod harian, semak sejarah dan sediakan laporan kehadiran.</p>
+      </div>
+      <div class="today-label">
+        <span class="status-dot"></span>
+        Sistem kehadiran
+      </div>
     </section>
 
-    <section class="attendance-card">
-      <div class="card-heading">
-        <h3>Maklumat Kehadiran</h3>
-        <p>Lengkapkan maklumat di bawah.</p>
+    <!-- DASHBOARD -->
+    <section class="section-block" aria-labelledby="dashboardTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">RINGKASAN HARIAN</p>
+          <h2 id="dashboardTitle">Dashboard</h2>
+        </div>
+        <span class="date-chip">Hari ini</span>
       </div>
 
-      <form id="attendanceForm">
-        <div class="form-group">
-          <label for="tarikh">Tarikh kehadiran</label>
-          <input type="date" id="tarikh" name="tarikh" required>
-        </div>
+      <div class="dashboard-grid">
+        <article class="stat-card">
+          <p>Kelas direkodkan</p>
+          <strong id="dashboardRecorded">—</strong>
+          <span>Rekod hari ini</span>
+        </article>
 
-        <div class="form-group">
-          <label for="kelas">Pilih kelas</label>
-          <select id="kelas" name="kelas" required>
-            <option value="">Sila pilih kelas</option>
-          </select>
-          <small id="classStatus" class="help-text">
-            Memuatkan senarai kelas...
-          </small>
-        </div>
+        <article class="stat-card">
+          <p>Kelas belum direkod</p>
+          <strong id="dashboardMissing">—</strong>
+          <span>Belum ada rekod hari ini</span>
+        </article>
 
-        <div class="stats-grid">
-          <div class="stat-box">
-            <span class="stat-label">Jumlah murid</span>
-            <strong id="jumlahMurid">—</strong>
+        <article class="stat-card">
+          <p>Kadar kehadiran</p>
+          <strong id="dashboardRate">—</strong>
+          <span>Berdasarkan murid dalam rekod</span>
+        </article>
+      </div>
+
+      <article class="panel missing-panel">
+        <h3>Kelas belum direkod hari ini</h3>
+        <div id="missingClasses" class="missing-list">
+          <p>Memuatkan maklumat...</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- BORANG SIMPAN -->
+    <section class="section-block" aria-labelledby="attendanceTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">INPUT DATA</p>
+          <h2 id="attendanceTitle">Simpan kehadiran</h2>
+        </div>
+      </div>
+
+      <section class="panel">
+        <p id="classStatus" class="status-text" role="status">
+          Memuatkan senarai kelas...
+        </p>
+
+        <form id="attendanceForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="tarikh">Tarikh kehadiran</label>
+              <input type="date" id="tarikh" required>
+            </div>
+
+            <div class="form-group">
+              <label for="kelas">Kelas</label>
+              <select id="kelas" required>
+                <option value="">Sila pilih kelas</option>
+              </select>
+            </div>
           </div>
 
-          <div class="stat-box">
-            <span class="stat-label">Bilangan hadir</span>
-            <strong id="jumlahHadirPreview">—</strong>
+          <div class="student-summary">
+            <div>
+              <span>Jumlah murid</span>
+              <strong id="jumlahMurid">—</strong>
+            </div>
+            <div>
+              <span>Hadir</span>
+              <strong id="jumlahHadirPreview">—</strong>
+            </div>
+            <div>
+              <span>Tidak hadir</span>
+              <strong id="jumlahTidakHadir">—</strong>
+            </div>
+            <div>
+              <span>Kehadiran</span>
+              <strong id="peratusKehadiran">—</strong>
+            </div>
           </div>
 
-          <div class="stat-box">
-            <span class="stat-label">Tidak hadir</span>
-            <strong id="jumlahTidakHadir">—</strong>
+          <div class="form-group">
+            <label for="bilanganHadir">Bilangan murid hadir</label>
+            <input
+              type="number"
+              id="bilanganHadir"
+              min="0"
+              step="1"
+              placeholder="Masukkan jumlah murid hadir"
+              required
+              disabled
+            >
           </div>
 
-          <div class="stat-box">
-            <span class="stat-label">Kehadiran</span>
-            <strong id="peratusKehadiran">—</strong>
+          <div class="form-group">
+            <label for="catatan">Catatan (pilihan)</label>
+            <textarea
+              id="catatan"
+              rows="3"
+              placeholder="Masukkan catatan jika perlu"
+            ></textarea>
+          </div>
+
+          <button type="submit" id="saveButton" class="button-primary" disabled>
+            Simpan Kehadiran
+          </button>
+
+          <p id="message" class="message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </section>
+
+    <!-- SEJARAH -->
+    <section class="section-block" aria-labelledby="historyTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">REKOD TERSIMPAN</p>
+          <h2 id="historyTitle">Sejarah kehadiran</h2>
+          <p>Rekod hari ini dipaparkan secara automatik.</p>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="filterTarikh">Tapis tarikh</label>
+            <input type="date" id="filterTarikh">
+          </div>
+
+          <div class="form-group">
+            <label for="filterKelas">Tapis kelas</label>
+            <select id="filterKelas">
+              <option value="">Semua kelas</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button type="button" id="searchHistoryButton" class="button-primary">
+            Cari Rekod
+          </button>
+          <button type="button" id="resetHistoryButton" class="button-secondary">
+            Rekod Hari Ini
+          </button>
+        </div>
+
+        <p id="historyMessage" class="message" role="status" aria-live="polite"></p>
+        <div id="historyResults" class="history-results">
+          <p class="empty-state">Memuatkan sejarah kehadiran...</p>
+        </div>
+      </section>
+    </section>
+
+    <!-- EDIT -->
+    <section id="editPanel" class="section-block panel edit-panel" hidden aria-labelledby="editTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">KEMAS KINI DATA</p>
+          <h2 id="editTitle">Edit rekod kehadiran</h2>
+          <p>Perubahan akan disimpan pada rekod asal.</p>
+        </div>
+      </div>
+
+      <form id="editForm">
+        <input type="hidden" id="editId">
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="editTarikh">Tarikh</label>
+            <input type="date" id="editTarikh" required>
+          </div>
+
+          <div class="form-group">
+            <label for="editKelas">Kelas</label>
+            <select id="editKelas" required>
+              <option value="">Sila pilih kelas</option>
+            </select>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="bilanganHadir">Bilangan murid hadir</label>
-          <input
-            type="number"
-            id="bilanganHadir"
-            name="bilanganHadir"
-            min="0"
-            step="1"
-            placeholder="Masukkan bilangan hadir"
-            required
-            disabled
-          >
-          <small class="help-text">
-            Bilangan tidak hadir akan dikira secara automatik.
-          </small>
+          <label for="editHadir">Bilangan hadir</label>
+          <input type="number" id="editHadir" min="0" step="1" required>
         </div>
+
+        <p id="editPreview" class="status-text"></p>
 
         <div class="form-group">
-          <label for="catatan">Catatan (pilihan)</label>
-          <textarea
-            id="catatan"
-            name="catatan"
-            rows="3"
-            maxlength="500"
-            placeholder="Masukkan catatan jika perlu"
-          ></textarea>
+          <label for="editCatatan">Catatan</label>
+          <textarea id="editCatatan" rows="3"></textarea>
         </div>
 
-        <button type="submit" id="saveButton" disabled>
-          Simpan Kehadiran
-        </button>
+        <div class="button-row">
+          <button type="submit" class="button-primary">Simpan Perubahan</button>
+          <button type="button" id="cancelEdit" class="button-secondary">
+            Batal
+          </button>
+        </div>
 
-        <p id="message" class="message" role="status" aria-live="polite"></p>
+        <p id="editMessage" class="message" role="status" aria-live="polite"></p>
       </form>
     </section>
 
+    <!-- LAPORAN BULANAN -->
+    <section class="section-block" aria-labelledby="reportTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">ANALISIS KEHADIRAN</p>
+          <h2 id="reportTitle">Laporan bulanan</h2>
+          <p>Semak rekod dan kadar kehadiran bagi bulan pilihan.</p>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="form-group report-filter">
+          <label for="filterBulan">Pilih bulan</label>
+          <input type="month" id="filterBulan" required>
+        </div>
+
+        <div class="button-row">
+          <button type="button" id="searchReportButton" class="button-primary">
+            Jana Laporan
+          </button>
+          <button type="button" id="printReportButton" class="button-secondary">
+            Cetak Laporan
+          </button>
+        </div>
+
+        <div class="report-summary">
+          <div>
+            <span>Jumlah rekod</span>
+            <strong id="reportCount">0</strong>
+          </div>
+          <div>
+            <span>Kadar kehadiran keseluruhan</span>
+            <strong id="reportRate">0.00%</strong>
+          </div>
+        </div>
+
+        <p id="reportMessage" class="message" role="status" aria-live="polite"></p>
+
+        <div id="reportResults" class="table-wrapper">
+          <p class="empty-state">Pilih bulan untuk melihat laporan.</p>
+        </div>
+      </section>
+    </section>
+
     <footer class="app-footer">
-      
-<section class="attendance-card history-card">
-  <div class="card-heading">
-    <h3>Sejarah Kehadiran</h3>
-    <p>Semak rekod kehadiran yang telah disimpan.</p>
-  </div>
-
-  <div class="form-group">
-    <label for="filterTarikh">Tapis mengikut tarikh</label>
-    <input type="date" id="filterTarikh">
-  </div>
-
-  <div class="form-group">
-    <label for="filterKelas">Tapis mengikut kelas</label>
-    <select id="filterKelas">
-      <option value="">Semua kelas</option>
-    </select>
-  </div>
-
-  <button type="button" id="searchHistoryButton">
-    Cari Rekod
-  </button>
-
-  <button
-    type="button"
-    id="resetHistoryButton"
-    class="secondary-button"
-  >
-    Papar Semua Rekod
-  </button>
-
-  <p id="historyMessage" class="message" role="status"></p>
-
-  <div id="historyResults" class="history-results">
-    <p>Tekan Cari Rekod untuk memaparkan sejarah kehadiran.</p>
-  </div>
-</section>
-
-      <p>e-Kehadiran SMK Kampung Baru Kerteh</p>
+      <p>e-Kehadiran · SMK Kampung Baru Kerteh</p>
+      <p>Data dipaparkan berdasarkan rekod dalam Google Sheets.</p>
     </footer>
   </main>
 </body>
