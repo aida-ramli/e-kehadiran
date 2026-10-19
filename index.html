@@ -111,6 +111,44 @@
     </section>
 
     <footer class="app-footer">
+      
+<section class="attendance-card history-card">
+  <div class="card-heading">
+    <h3>Sejarah Kehadiran</h3>
+    <p>Semak rekod kehadiran yang telah disimpan.</p>
+  </div>
+
+  <div class="form-group">
+    <label for="filterTarikh">Tapis mengikut tarikh</label>
+    <input type="date" id="filterTarikh">
+  </div>
+
+  <div class="form-group">
+    <label for="filterKelas">Tapis mengikut kelas</label>
+    <select id="filterKelas">
+      <option value="">Semua kelas</option>
+    </select>
+  </div>
+
+  <button type="button" id="searchHistoryButton">
+    Cari Rekod
+  </button>
+
+  <button
+    type="button"
+    id="resetHistoryButton"
+    class="secondary-button"
+  >
+    Papar Semua Rekod
+  </button>
+
+  <p id="historyMessage" class="message" role="status"></p>
+
+  <div id="historyResults" class="history-results">
+    <p>Tekan Cari Rekod untuk memaparkan sejarah kehadiran.</p>
+  </div>
+</section>
+
       <p>e-Kehadiran SMK Kampung Baru Kerteh</p>
     </footer>
   </main>
