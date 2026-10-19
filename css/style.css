@@ -257,3 +257,66 @@ button:hover:not(:disabled) {
     font-size: 22px;
   }
 }
+
+
+/* PEMBAIKAN PAPARAN TELEFON */
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.container,
+.attendance-card,
+form,
+.form-group {
+  min-width: 0;
+  max-width: 100%;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+input[type="date"],
+input[type="number"] {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .attendance-card {
+    padding: 16px 12px;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  input[type="date"] {
+    padding: 10px 8px;
+  }
+}
+
