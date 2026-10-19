@@ -53,12 +53,14 @@ function tarikhMalaysiaHariIni() {
 }
 
 function setTarikhHariIni() {
+  const hariIni = tarikhMalaysiaHariIni();
+
   if (tarikhInput) {
-    tarikhInput.value = tarikhMalaysiaHariIni();
+    tarikhInput.value = hariIni;
   }
 
   if (filterTarikh) {
-    filterTarikh.value = tarikhMalaysiaHariIni();
+    filterTarikh.value = hariIni;
   }
 }
 
@@ -124,19 +126,22 @@ async function muatkanKelas() {
     });
 
     kelasSelect.disabled = false;
+
     classStatus.textContent =
       `${senaraiKelas.length} kelas berjaya dimuatkan.`;
 
     isiPilihanKelasSejarah();
     kemasKiniPaparan();
 
-    // Paparkan rekod hari ini selepas senarai kelas siap.
+    // Paparkan rekod hari ini secara automatik.
     await cariSejarahKehadiran();
+
   } catch (error) {
     classStatus.textContent =
       "Senarai kelas gagal dimuatkan. Sila muat semula halaman.";
 
     paparMesej(`Ralat memuatkan kelas: ${error.message}`, "error");
+
     paparMesejSejarah(
       "Sejarah belum dapat dimuatkan kerana senarai kelas gagal diperoleh.",
       "error"
@@ -189,6 +194,7 @@ function kemasKiniPaparan() {
   const jumlahMurid = Number(kelasDipilih.jumlahMurid);
 
   jumlahMuridDisplay.textContent = jumlahMurid;
+
   bilanganHadirInput.disabled = false;
   bilanganHadirInput.max = jumlahMurid;
 
@@ -233,103 +239,111 @@ function kemasKiniPaparan() {
 // EVENT BORANG KEHADIRAN
 // ========================================
 
-kelasSelect.addEventListener("change", () => {
-  paparMesej("");
-  kemasKiniPaparan();
-});
+if (kelasSelect) {
+  kelasSelect.addEventListener("change", () => {
+    paparMesej("");
+    kemasKiniPaparan();
+  });
+}
 
-bilanganHadirInput.addEventListener("input", kemasKiniPaparan);
+if (bilanganHadirInput) {
+  bilanganHadirInput.addEventListener("input", kemasKiniPaparan);
+}
 
 // ========================================
 // SIMPAN KEHADIRAN
 // ========================================
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
+if (form) {
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-  if (sedangMenyimpan) return;
+    if (sedangMenyimpan) return;
 
-  paparMesej("");
+    paparMesej("");
 
-  const kelasDipilih = senaraiKelas.find(
-    (kelas) => kelas.id === kelasSelect.value
-  );
-
-  if (!kelasDipilih) {
-    paparMesej("Sila pilih kelas terlebih dahulu.", "error");
-    return;
-  }
-
-  if (!tarikhInput.value) {
-    paparMesej("Sila pilih tarikh kehadiran.", "error");
-    return;
-  }
-
-  const hadir = Number(bilanganHadirInput.value);
-  const jumlahMurid = Number(kelasDipilih.jumlahMurid);
-
-  if (
-    bilanganHadirInput.value.trim() === "" ||
-    !Number.isInteger(hadir) ||
-    hadir < 0 ||
-    hadir > jumlahMurid
-  ) {
-    paparMesej("Sila masukkan bilangan hadir yang sah.", "error");
-    return;
-  }
-
-  const payload = {
-    tarikh: tarikhInput.value,
-    idKelas: kelasDipilih.id,
-    bilanganHadir: hadir,
-    catatan: catatanInput.value.trim()
-  };
-
-  sedangMenyimpan = true;
-  saveButton.disabled = true;
-  saveButton.textContent = "Sedang menyimpan...";
-
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify(payload)
-    });
-
-    const result = await response.json();
-
-    if (result.status !== "berjaya") {
-      throw new Error(result.mesej || "Rekod gagal disimpan.");
-    }
-
-    paparMesej(
-      `Berjaya disimpan! ID rekod: ${result.data.idRekod}`,
-      "success"
+    const kelasDipilih = senaraiKelas.find(
+      (kelas) => kelas.id === kelasSelect.value
     );
 
-    bilanganHadirInput.value = "";
-    catatanInput.value = "";
-
-    kemasKiniPaparan();
-
-    // Jika rekod yang disimpan ialah untuk tarikh yang sedang ditapis,
-    // kemas kini sejarah secara automatik.
-    if (filterTarikh.value === payload.tarikh) {
-      await cariSejarahKehadiran();
+    if (!kelasDipilih) {
+      paparMesej("Sila pilih kelas terlebih dahulu.", "error");
+      return;
     }
-  } catch (error) {
-    paparMesej(
-      `Simpanan tidak dapat disahkan. Semak Google Sheets sebelum mencuba semula. Maklumat: ${error.message}`,
-      "error"
-    );
-  } finally {
-    sedangMenyimpan = false;
-    saveButton.textContent = "Simpan Kehadiran";
-    kemasKiniPaparan();
-  }
-});
+
+    if (!tarikhInput.value) {
+      paparMesej("Sila pilih tarikh kehadiran.", "error");
+      return;
+    }
+
+    const hadir = Number(bilanganHadirInput.value);
+    const jumlahMurid = Number(kelasDipilih.jumlahMurid);
+
+    if (
+      bilanganHadirInput.value.trim() === "" ||
+      !Number.isInteger(hadir) ||
+      hadir < 0 ||
+      hadir > jumlahMurid
+    ) {
+      paparMesej("Sila masukkan bilangan hadir yang sah.", "error");
+      return;
+    }
+
+    const payload = {
+      tarikh: tarikhInput.value,
+      idKelas: kelasDipilih.id,
+      bilanganHadir: hadir,
+      catatan: catatanInput.value.trim()
+    };
+
+    sedangMenyimpan = true;
+    saveButton.disabled = true;
+    saveButton.textContent = "Sedang menyimpan...";
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (result.status !== "berjaya") {
+        throw new Error(result.mesej || "Rekod gagal disimpan.");
+      }
+
+      paparMesej(
+        `Berjaya disimpan! ID rekod: ${result.data.idRekod}`,
+        "success"
+      );
+
+      bilanganHadirInput.value = "";
+      catatanInput.value = "";
+
+      kemasKiniPaparan();
+
+      // Kemas kini sejarah jika tarikh rekod sepadan dengan penapis.
+      const tarikhPenapis = filterTarikh.value || tarikhMalaysiaHariIni();
+
+      if (tarikhPenapis === payload.tarikh) {
+        await cariSejarahKehadiran();
+      }
+
+    } catch (error) {
+      paparMesej(
+        `Simpanan tidak dapat disahkan. Semak Google Sheets sebelum mencuba semula. Maklumat: ${error.message}`,
+        "error"
+      );
+    } finally {
+      sedangMenyimpan = false;
+      saveButton.textContent = "Simpan Kehadiran";
+      kemasKiniPaparan();
+    }
+  });
+}
 
 // ========================================
 // PAPARAN REKOD SEJARAH
@@ -352,7 +366,7 @@ function paparSenaraiRekod(rekod) {
     card.className = "history-record";
 
     const tajuk = document.createElement("h4");
-    tajuk.textContent = item.namaKelas;
+    tajuk.textContent = item.namaKelas || "Kelas tidak diketahui";
 
     const tarikh = document.createElement("p");
     tarikh.textContent = `Tarikh: ${item.tarikh}`;
@@ -367,7 +381,7 @@ function paparSenaraiRekod(rekod) {
 
     const peratus = document.createElement("p");
     peratus.textContent =
-      `Kehadiran: ${Number(item.peratusKehadiran).toFixed(2)}%`;
+      `Kehadiran: ${Number(item.peratusKehadiran || 0).toFixed(2)}%`;
 
     const id = document.createElement("small");
     id.textContent = `ID rekod: ${item.idRekod}`;
@@ -401,13 +415,17 @@ async function cariSejarahKehadiran() {
   historyResults.replaceChildren();
 
   try {
-    const parameter = new URLSearchParams({
-      action: "rekod"
-    });
+    // Jika tarikh kosong, gunakan tarikh Malaysia hari ini.
+    const tarikhDipilih =
+      filterTarikh.value || tarikhMalaysiaHariIni();
 
-    if (filterTarikh.value) {
-      parameter.set("tarikh", filterTarikh.value);
-    }
+    // Kekalkan tarikh hari ini pada penapis jika ruangan kosong.
+    filterTarikh.value = tarikhDipilih;
+
+    const parameter = new URLSearchParams({
+      action: "rekod",
+      tarikh: tarikhDipilih
+    });
 
     if (filterKelas.value) {
       parameter.set("idKelas", filterKelas.value);
@@ -426,7 +444,11 @@ async function cariSejarahKehadiran() {
     }
 
     paparSenaraiRekod(result.data);
-    paparMesejSejarah(`${result.data.length} rekod dijumpai.`);
+
+    paparMesejSejarah(
+      `${result.data.length} rekod dijumpai untuk ${tarikhDipilih}.`
+    );
+
   } catch (error) {
     paparMesejSejarah(
       `Gagal memuatkan sejarah: ${error.message}`,
@@ -456,6 +478,7 @@ if (resetHistoryButton) {
   resetHistoryButton.addEventListener("click", () => {
     filterTarikh.value = tarikhMalaysiaHariIni();
     filterKelas.value = "";
+
     cariSejarahKehadiran();
   });
 }
